@@ -1,0 +1,64 @@
+*, body {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 1rem;
+    line-height: normal;
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+figure {
+    margin: 0;
+}
+
+ul, ol, dl {
+    list-style: none;
+    margin: 0;
+}
+
+a {
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+}
+
+a:active {
+    color: black;
+}
+
+a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+p {
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bolder;
+    line-height: inherit;
+    margin: 0;
+}
+
+:root {
+    --color-whatsAppGreen: #25d366;
+    --color-red: #F90000;
+    --color-aquaMarine: #4ecdc4;
+    --color-orange: #FC0000;
+    --color-purple: #663399;
+    --color-green: #2ecc71;
+    --color-yellow: #e9d460;
+    --color-blue: #19b5fe;
+    --color-white: #ffffff;
+    --color-black-gray: #131313;
+    --color-white-gray: #DADADA;
+    --color-white-gray-DA: #C1C1C1;
+}
+
+.zoomInDown {
+     animation-duration: 5s;
+     animation-delay: 0s;
+ }

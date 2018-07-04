@@ -11,6 +11,12 @@
 |
 */
 
+require '../vendor/autoload.php';
+Auth::routes();
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
+
+Route::get('/index', 'IndexController@show')->name('index');
+Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('producto', 'ProductoController');

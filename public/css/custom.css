@@ -1,0 +1,383 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+#wrapper {
+    width: 100%;
+    height: calc(100% - 100px);
+    background: #202020;
+}
+
+#page-wrapper {
+    padding: 15px 15px 15px 15px;
+    background: #F3F3F3;
+}
+
+#page-inner {
+    width: 100%;
+    margin: 10px 20px 10px 0px;
+    background-color: #fff !important;
+    padding: 20px;
+}
+
+.custom-container {
+
+}
+
+.text-center {
+    text-align: center;
+}
+
+.no-boder {
+    border: 1px solid #f3f3f3;
+}
+
+h2 {
+    color: #f00;
+}
+
+h4 {
+    padding-top: 10px;
+}
+
+.square-btn-adjust {
+    border: 0px solid transparent;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+
+}
+
+p {
+    font-size: 16px;
+    line-height: 25px;
+    padding-top: 20px;
+}
+
+/*==============================================
+   DASHBOARD STYLES    
+    =============================================*/
+.panel-back {
+    background-color: #F8F8F8;
+
+}
+
+.noti-box {
+    min-height: 100px;
+    padding: 20px;
+}
+
+.noti-box .icon-box {
+    display: block;
+    float: left;
+    margin: 0 15px 10px 0;
+    width: 70px;
+    height: 70px;
+    line-height: 75px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 40px;
+}
+
+.text-box p {
+    margin: 0 0 3px;
+}
+
+.main-text {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.set-icon {
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+
+}
+
+.bg-color-green {
+    background-color: #00CE6F;
+    color: #fff;
+}
+
+.bg-color-blue {
+    background-color: #A95DF0;
+    color: #fff;
+}
+
+.bg-color-red {
+    background-color: #DB0630;
+    color: #fff;
+}
+
+.bg-color-brown {
+    background-color: #B94A00;
+    color: #fff;
+}
+
+.icon-box-right {
+    display: block;
+    float: right;
+    margin: 0 15px 10px 0;
+    width: 70px;
+    height: 70px;
+    line-height: 75px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 40px;
+}
+
+.main-temp-back {
+    background: #8702A8;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 300;
+    text-align: center;
+}
+
+.main-temp-back .text-temp {
+    font-size: 40px;
+}
+
+.back-dash {
+    padding: 20px;
+    font-size: 20px;
+    font-weight: 500;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    background-color: #2EA7EB;
+    color: #fff;
+}
+
+.back-dash p {
+    padding-top: 16px;
+    font-size: 13px;
+    color: #fff;
+    line-height: 25px;
+    text-align: justify;
+}
+
+.back-footer-green {
+    background-color: #009B50;
+    border-top: 0px solid #fff;
+}
+
+.back-footer-red {
+    background-color: #AF0000;
+    border-top: 0px solid #fff;
+}
+
+.color-bottom-txt {
+    color: #000;
+    font-size: 16px;
+    line-height: 30px;
+}
+
+/*CHAT PANEL*/
+.chat-panel .panel-body {
+    height: 450px;
+    overflow-y: scroll;
+}
+
+.chat-box {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.chat-box li {
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #808080;
+}
+
+.chat-box li.left .chat-body {
+    margin-left: 90px;
+}
+
+.chat-box li .chat-body p {
+    margin: 0;
+    color: #8d8888;
+}
+
+.chat-img > img {
+    margin-left: 20px;
+}
+
+/*==============================================
+    MENU STYLES    
+    =============================================*/
+
+#main-top-menu {
+    background: #202020;
+}
+
+.navbar-cls-top .navbar-brand {
+    color: #fff;
+    background: #1a2d4a;
+    width: 200px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.active-menu {
+    background-color: #C90000 !important;
+}
+
+.arrow {
+    float: right;
+}
+
+.fa.arrow:before {
+    content: "\f104";
+}
+
+.active > a > .fa.arrow:before {
+    content: "\f107";
+}
+
+.navbar-side a {
+    color: white !important;
+    display: block;
+    padding: 15px;
+}
+
+.navbar-side a:hover {
+    background-color: #2f363b;
+    text-decoration: none;
+}
+
+/*==============================================
+    UI ELEMENTS STYLES     
+    =============================================*/
+.btn-circle {
+    width: 50px;
+    height: 50px;
+    padding: 6px 0;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.428571429;
+}
+
+.navbar-side a i {
+    padding-right: 10px;
+}
+
+.navbar-custom {
+    background: #202020;
+    position: fixed;
+    height: 95%;
+}
+
+.input-group .input-group-addon {
+    width: 25px;
+}
+
+/* Drop down */
+
+/* Fixed sidenav-custom, full height */
+.sidenav-custom {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+/* Style the sidenav-custom links and the dropdown button */
+.sidenav-custom a, .dropdown-btn-custom {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+}
+
+/* On mouse-over */
+.sidenav-custom a:hover, .dropdown-btn-custom:hover {
+    color: #f1f1f1;
+}
+
+/* Add an active class to the active dropdown button */
+.sidenav-custom .active {
+    background-color: green;
+    color: white;
+}
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.dropdown-container {
+    display: none;
+    background-color: #262626;
+    padding-left: 8px;
+}
+
+/* Optional: Style the caret down icon */
+.fa-caret-down {
+    float: right;
+    padding-right: 8px;
+}
+
+.dropdown-toggle::after {
+    display: inline-flex;
+}
+
+@media (max-width: 780px) {
+    .navbar-header a {
+        width: auto;
+        padding: 0 20px;
+    }
+
+    .navbar-custom {
+        position: relative;
+    }
+}
+
+.panel-general {
+    max-width: 720px;
+    margin: auto;
+    padding: 10px;
+}
+
+.panel-general label:first-child {
+    margin-top: 0;
+}
+
+.panel-general label {
+    display: block;
+    font-weight: 200;
+    margin: 15px 0 5px;
+    width: 100%;
+}
+
+.panel-general input[type="text"] {
+    border-radius: 5px;
+    border: 1px solid #c1bec4;
+    background-color: #f0ecf4;
+    outline: none;
+    font-size: 0.9rem;
+    font-weight: 200;
+    padding: 5px 5px;
+    width: 100%;
+}
+
+@media (max-width: 720px) {
+    .panel-general {
+        width: 100%;
+        margin: 0;
+    }
+}
