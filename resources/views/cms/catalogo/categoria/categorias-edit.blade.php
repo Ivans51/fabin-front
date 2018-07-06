@@ -1,6 +1,6 @@
-@extends('cms.catalogo.productos-show')
+@extends('layouts.app')
 
-@section('product')
+@section('content')
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -10,11 +10,11 @@
                     </div>
 
                     <div class="panel-body">
-                        {!! Form::model($post, ['route' => ['posts.update', $post->id], 'method' => 'PUT', 'files' => true]) !!}
+                        {{--{!! Form::model($product, ['route' => ['producto.update', $product], 'method' => 'PUT', 'files' => true]) !!}
 
-                        @include('admin.posts.partials.form')
+                        @include('cms.catalogo.partials.form')
 
-                        {!! Form::close() !!}
+                        {!! Form::close() !!}--}}
                     </div>
                 </div>
             </div>

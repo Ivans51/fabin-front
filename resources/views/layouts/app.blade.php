@@ -11,11 +11,12 @@
     <title>{{ config('app.name', 'Fabin') }}</title>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     {{--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
           integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/effects.css') }}" rel="stylesheet">
 </head>
 <body>
 <div id="app">
@@ -116,5 +117,7 @@
 <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/dropdown.js') }}"></script>
+{{--<script src="{{ asset('js/effect-dropdown.js') }}"></script>--}}
+<script src="{{ asset('js/effect-modal.js') }}"></script>
 </body>
 </html>

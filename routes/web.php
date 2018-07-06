@@ -11,7 +11,7 @@
 |
 */
 
-require '../vendor/autoload.php';
+// require '../vendor/autoload.php';
 Auth::routes();
 Route::get('/', function () {
     return view('home');

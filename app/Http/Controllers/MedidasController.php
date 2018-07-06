@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 
-class ProductoController extends Controller {
+class MedidasController extends Controller {
 	/**
 	 * Display a listing of the resource.
 	 *
