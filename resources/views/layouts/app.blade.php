@@ -56,17 +56,21 @@
                 <a href="{{route('manual.index')}}">Manual</a>
             </div>
         </div>
-        <div class="custom-container d-flex justify-content-between">
-            <div style="width: 200px; height: 1px">
-            </div>
-            <!-- /. NAV TOP  -->
-            <div style="flex: 1">
+    @endauth
+    <div class="custom-container d-flex justify-content-between">
+        @auth()
+            <div class="container-left"></div>@endauth
+    <!-- /. NAV TOP  -->
+        <div style="flex: 1">
+            @auth()
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-0">
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Fabin') }}
                     </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarNavDropdown"
+                            aria-controls="navbarNavDropdown" aria-expanded="false"
+                            aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -94,11 +98,10 @@
                         </ul>
                     </div>
                 </nav>
-                @yield('content')
-            </div>
+            @endauth
+            @yield('content')
         </div>
-    @endauth
-    <a href="{{ route('login') }}">Login</a>
+    </div>
 </div>
 
 <!-- Scripts -->

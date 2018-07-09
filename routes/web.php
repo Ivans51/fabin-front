@@ -15,6 +15,8 @@
 Route::get( '/', function () {
 	return redirect()->route('home');
 } );
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
 Route::get( '/index', 'IndexController@show' )->name( 'index' );
 
 Route::resource( 'producto', 'ProductoController' );
@@ -32,6 +34,7 @@ Route::resource( 'usuarios', 'UsuariosController' );
 Route::resource( 'auditoria', 'AuditoriaController' );
 Route::resource( 'respaldo', 'RespaldoController' );
 Route::resource( 'manual', 'ManualController' );
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::resource( 'auditoria', 'AuditoriaController' );
+Route::resource( 'respaldo', 'RespaldoController' );
+Route::resource( 'manual', 'ManualController' );
