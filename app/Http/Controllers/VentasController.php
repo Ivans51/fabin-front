@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 
-class MedidasController extends Controller {
+class VentasController extends Controller {
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -24,7 +24,7 @@ class MedidasController extends Controller {
 			error_log( $e->getMessage() );
 		}
 
-		return view( 'cms.catalogo.medidas.index', compact( 'products' ) );
+		return view( 'cms.ventas.detalles.index', compact( 'products' ) );
 	}
 
 	/**
@@ -69,7 +69,7 @@ class MedidasController extends Controller {
 		} catch ( GuzzleException $e ) {
 			error_log( $e->getMessage() );
 		}
-		return view( 'cms.catalogo.medidas.show', compact( 'product' ) );
+		return view( 'cms.ventas.detalles.show', compact( 'product' ) );
 	}
 
 	/**
@@ -90,7 +90,7 @@ class MedidasController extends Controller {
 		} catch ( GuzzleException $e ) {
 			error_log( $e->getMessage() );
 		}
-		return view( 'cms.catalogo.medidas.edit', compact( 'product' ) );
+		return view( 'cms.ventas.detalles.edit', compact( 'product' ) );
 	}
 
 	/**

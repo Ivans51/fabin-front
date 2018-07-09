@@ -20,58 +20,46 @@
 </head>
 <body>
 <div id="app">
-    <div class="sidenav-custom">
-        <a href="#about">Inicio</a>
-        <button class="dropdown-btn-custom">Catálogo
-            <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-container">
-            <a href="{{ route('producto.index') }}">Producto</a>
-            <a href="#">Categoría</a>
-            <a href="#">Unidades de medida</a>
+    @auth()
+        <div class="sidenav-custom">
+            <a href="{{ url('/') }}">Inicio</a>
+            <button class="dropdown-btn-custom">Catálogo
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="{{ route('producto.index') }}">Producto</a>
+                <a href="{{ route('categoria.index') }}">Categoría</a>
+                <a href="{{ route('medidas.index') }}">Unidades de medida</a>
+            </div>
+            <button class="dropdown-btn-custom">Pago
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="{{route('metodos.index')}}">Métodos</a>
+                <a href="{{route('preferencias.index')}}">Preferencias</a>
+                <a href="{{route('iva.index')}}">IVA</a>
+            </div>
+            <button class="dropdown-btn-custom">Ventas
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="{{route('ventas.index')}}">Detalles</a>
+            </div>
+            <a href="{{route('clientes.index')}}">Clientes</a>
+            <a href="{{route('usuarios.index')}}">Usuarios</a>
+            <button class="dropdown-btn-custom">Operaciones
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="{{route('auditoria.index')}}">Auditoria</a>
+                <a href="{{route('respaldo.index')}}">Respaldo</a>
+                <a href="{{route('manual.index')}}">Manual</a>
+            </div>
         </div>
-        <button class="dropdown-btn-custom">Pago
-            <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-container">
-            <a href="#">Métodos</a>
-            <a href="#">Preferencias</a>
-            <a href="#">IVA</a>
-        </div>
-        <button class="dropdown-btn-custom">Ventas
-            <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-container">
-            <a href="#">Detalles</a>
-        </div>
-        <button class="dropdown-btn-custom">Clientes
-            <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-container">
-            <a href="#">Crear</a>
-            <a href="#">Editar</a>
-        </div>
-        <button class="dropdown-btn-custom">Usuarios
-            <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-container">
-            <a href="#">Crear</a>
-            <a href="#">Editar</a>
-        </div>
-        <button class="dropdown-btn-custom">Operaciones
-            <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-container">
-            <a href="#">Auditoria</a>
-            <a href="#">Respaldo</a>
-            <a href="#">Manual</a>
-        </div>
-    </div>
-    <div class="custom-container d-flex justify-content-between">
-        <div style="width: 200px; height: 1px">
-        </div>
-        <!-- /. NAV TOP  -->
-        @auth()
+        <div class="custom-container d-flex justify-content-between">
+            <div style="width: 200px; height: 1px">
+            </div>
+            <!-- /. NAV TOP  -->
             <div style="flex: 1">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-0">
                     <a class="navbar-brand" href="{{ url('/') }}">
@@ -108,8 +96,9 @@
                 </nav>
                 @yield('content')
             </div>
-        @endauth
-    </div>
+        </div>
+    @endauth
+    <a href="{{ route('login') }}">Login</a>
 </div>
 
 <!-- Scripts -->

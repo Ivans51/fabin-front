@@ -24,7 +24,7 @@ class ProductoController extends Controller {
 			error_log( $e->getMessage() );
 		}
 
-		return view( 'cms.catalogo.productos-index', compact( 'products' ) );
+		return view( 'cms.catalogo.producto.index', compact( 'products' ) );
 	}
 
 	/**
@@ -69,7 +69,7 @@ class ProductoController extends Controller {
 		} catch ( GuzzleException $e ) {
 			error_log( $e->getMessage() );
 		}
-		return view( 'cms.catalogo.productos-show', compact( 'product' ) );
+		return view( 'cms.catalogo.producto.show', compact( 'product' ) );
 	}
 
 	/**
@@ -90,7 +90,7 @@ class ProductoController extends Controller {
 		} catch ( GuzzleException $e ) {
 			error_log( $e->getMessage() );
 		}
-		return view( 'cms.catalogo.productos-edit', compact( 'product' ) );
+		return view( 'cms.catalogo.producto.edit', compact( 'product' ) );
 	}
 
 	/**
