@@ -38,6 +38,40 @@ class UsuariosController extends Controller {
 		return view( 'admin.posts.create', compact( 'product' ) );
 	}
 
+	public function history() {
+		$status = 0;
+		$client = new Client( [
+			'base_uri' => 'https://jsonplaceholder.typicode.com',
+			'timeout'  => 2.0,
+		] );
+		try {
+			$response = $client->request( 'GET', '/posts' );
+			$products = json_decode( $response->getBody()->getContents() );
+			$status = $response->getStatusCode();
+		} catch ( GuzzleException $e ) {
+			error_log( $e->getMessage() );
+		}
+
+		return $status == 200 ? view( 'cms.usuarios.detalles.history', compact( 'products' ) ) : abort( 404 );
+	}
+
+	public function all() {
+		$status = 0;
+		$client = new Client( [
+			'base_uri' => 'https://jsonplaceholder.typicode.com',
+			'timeout'  => 2.0,
+		] );
+		try {
+			$response = $client->request( 'GET', '/posts' );
+			$products = json_decode( $response->getBody()->getContents() );
+			$status = $response->getStatusCode();
+		} catch ( GuzzleException $e ) {
+			error_log( $e->getMessage() );
+		}
+
+		return $status == 200 ? view( 'cms.usuarios.detalles.todos', compact( 'products' ) ) : abort( 404 );
+	}
+
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -59,16 +93,7 @@ class UsuariosController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function show( $id ) {
-		$client = new Client( [
-			'base_uri' => 'https://jsonplaceholder.typicode.com',
-			'timeout'  => 2.0,
-		] );
-		try {
-			$response = $client->request( 'GET', '/posts/' . $id );
-			$product = json_decode( $response->getBody()->getContents() );
-		} catch ( GuzzleException $e ) {
-			error_log( $e->getMessage() );
-		}
+		$product = '';
 		return view( 'cms.usuarios.detalles.show', compact( 'product' ) );
 	}
 
@@ -80,16 +105,7 @@ class UsuariosController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit( $id ) {
-		$client = new Client( [
-			'base_uri' => 'https://jsonplaceholder.typicode.com',
-			'timeout'  => 2.0,
-		] );
-		try {
-			$response = $client->request( 'GET', '/posts/' . $id );
-			$product = json_decode( $response->getBody()->getContents() );
-		} catch ( GuzzleException $e ) {
-			error_log( $e->getMessage() );
-		}
+		$product = '';
 		return view( 'cms.usuarios.detalles.edit', compact( 'product' ) );
 	}
 

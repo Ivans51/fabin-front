@@ -46,7 +46,21 @@
                 <a href="{{route('ventas.index')}}">Detalles</a>
             </div>
             <a href="{{route('clientes.index')}}">Clientes</a>
-            <a href="{{route('usuarios.index')}}">Usuarios</a>
+            <button class="dropdown-btn-custom">Pedidos
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="{{route('pedidos.index')}}">Crear</a>
+                <a href="{{route('pedidos_status')}}">Status</a>
+                <a href="{{route('pedidos.index')}}">Todos</a>
+            </div><button class="dropdown-btn-custom">Usuarios
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="{{route('usuarios.index')}}">Crear</a>
+                <a href="{{route('usuarios_history')}}">Historial</a>
+                <a href="{{route('usuarios_todos')}}">Todos</a>
+            </div>
             <button class="dropdown-btn-custom">Operaciones
                 <i class="fa fa-caret-down"></i>
             </button>

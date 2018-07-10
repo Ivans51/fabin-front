@@ -19,6 +19,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get( '/index', 'IndexController@show' )->name( 'index' );
 
+Route::get( 'usuarios/history', 'UsuariosController@history' )->name('usuarios_history');
+Route::get( 'usuarios/todos', 'UsuariosController@all' )->name('usuarios_todos');
+
+Route::get( 'pedidos/status', 'PedidosController@create' )->name('usuarios_todos');
+
 Route::resource( 'producto', 'ProductoController' );
 Route::resource( 'categoria', 'CategoriaController' );
 Route::resource( 'medidas', 'MedidasController' );
@@ -35,6 +40,4 @@ Route::resource( 'auditoria', 'AuditoriaController' );
 Route::resource( 'respaldo', 'RespaldoController' );
 Route::resource( 'manual', 'ManualController' );
 
-Route::resource( 'auditoria', 'AuditoriaController' );
-Route::resource( 'respaldo', 'RespaldoController' );
-Route::resource( 'manual', 'ManualController' );
+Route::resource( 'pedidos', 'PedidosController' );

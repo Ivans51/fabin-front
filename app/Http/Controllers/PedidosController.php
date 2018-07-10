@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 
-class ClientesController extends Controller {
+class PedidosController extends Controller {
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -26,7 +26,7 @@ class ClientesController extends Controller {
 			error_log( $e->getMessage() );
 		}
 
-		return $status == 200 ? view( 'cms.clientes.detalles.index', compact( 'products' ) ) : abort( 404 );
+		return $status == 200 ? view( 'cms.pedidos.categoria.index', compact( 'products' ) ) : abort( 404 );
 	}
 
 	/**
@@ -38,6 +38,12 @@ class ClientesController extends Controller {
 		$product = '';
 
 		return view( 'admin.posts.create', compact( 'product' ) );
+	}
+
+	public function status() {
+		$product = '';
+
+		return view( 'cms.pedidos.producto.status', compact( 'product' ) );
 	}
 
 	/**
@@ -67,12 +73,11 @@ class ClientesController extends Controller {
 		] );
 		try {
 			$response = $client->request( 'GET', '/posts/' . $id );
-			$product  = json_decode( $response->getBody()->getContents() );
+			$product = json_decode( $response->getBody()->getContents() );
 		} catch ( GuzzleException $e ) {
 			error_log( $e->getMessage() );
 		}
-
-		return view( 'cms.clientes.detalles.show', compact( 'product' ) );
+		return view( 'cms.pedidos.producto.show', compact( 'product' ) );
 	}
 
 	/**
@@ -89,12 +94,11 @@ class ClientesController extends Controller {
 		] );
 		try {
 			$response = $client->request( 'GET', '/posts/' . $id );
-			$product  = json_decode( $response->getBody()->getContents() );
+			$product = json_decode( $response->getBody()->getContents() );
 		} catch ( GuzzleException $e ) {
 			error_log( $e->getMessage() );
 		}
-
-		return view( 'cms.clientes.detalles.edit', compact( 'product' ) );
+		return view( 'cms.pedidos.producto.edit', compact( 'product' ) );
 	}
 
 	/**
