@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\RequestOptions;
 use Illuminate\Http\Request;
 
 class UsuarioLoginController extends Controller {
@@ -52,20 +51,19 @@ class UsuarioLoginController extends Controller {
 	}
 
 	public function login( Request $request ) {
-		$client   = new Client( [
-			'base_uri' => 'http://165.227.96.113:5010',
-			'timeout'  => 2.0,
-		] );
-		$response = $client->post(
-			'/api/users/login',
-			[
-				RequestOptions::JSON =>
-					[ 'email' => $request->input( 'email' ), 'contrasehna' => $request->input( 'contrasehna' ), ]
-			]
-		);
+		$client = new Client(['base_uri' => 'http://165.227.96.113:5010']);
+		try {
+			$response     = $client->request( 'POST', '/api/users/login', [
+				'form_params' => [
+					'email'       => $request->input( 'email' ),
+					'contrasehna' => $request->input( 'contrasehna' )
+				]
+			] );
+			$responseJSON = json_decode( $response->getBody(), true );
 
-		$responseJSON = json_decode( $response->getBody(), true );
-		return view('cms.register', compact($response));
+			return view( 'cms.register', compact( $response ) );
+		} catch ( GuzzleException $e ) {
+		}
 		// session('user_start');
 	}
 
