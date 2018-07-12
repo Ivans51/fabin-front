@@ -15,14 +15,15 @@
 Route::get( '/', function () {
 	return redirect()->route('home');
 } );
-Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get( '/index', 'IndexController@show' )->name( 'index' );
 
 Route::get( 'usuarios/history', 'UsuariosController@history' )->name('usuarios_history');
 Route::get( 'usuarios/todos', 'UsuariosController@all' )->name('usuarios_todos');
 
-Route::get( 'pedidos/status', 'PedidosController@create' )->name('usuarios_todos');
+Route::get( 'pedidos/status', 'PedidosController@status' )->name('pedidos_status');
+
+Route::get( 'login', '@status' )->name('pedidos_status');
 
 Route::resource( 'producto', 'ProductoController' );
 Route::resource( 'categoria', 'CategoriaController' );

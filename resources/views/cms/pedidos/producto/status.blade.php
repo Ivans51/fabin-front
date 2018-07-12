@@ -10,8 +10,8 @@
                     </div>
 
                     <div class="panel-body">
-                        <p><strong>Nombre</strong> {{ $product->title }}</p>
-                        <p><strong>Descripción</strong> {{ $product->body }}</p>
+                        {{--<p><strong>Nombre</strong> {{ $product->title }}</p>
+                        <p><strong>Descripción</strong> {{ $product->body }}</p>--}}
                     </div>
                     <a href="{{ URL::previous() }}">Go Back</a>
                 </div>

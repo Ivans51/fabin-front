@@ -6,14 +6,13 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 
-class PedidosController extends Controller {
+class UsuarioPasswordController extends Controller {
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		$status = 0;
 		$client = new Client( [
 			'base_uri' => 'https://jsonplaceholder.typicode.com',
 			'timeout'  => 2.0,
@@ -21,12 +20,11 @@ class PedidosController extends Controller {
 		try {
 			$response = $client->request( 'GET', '/posts' );
 			$products = json_decode( $response->getBody()->getContents() );
-			$status = $response->getStatusCode();
 		} catch ( GuzzleException $e ) {
 			error_log( $e->getMessage() );
 		}
 
-		return $status == 200 ? view( 'cms.pedidos.producto.index', compact( 'products' ) ) : abort( 404 );
+		return view( 'cms.pago.iva.index', compact( 'products' ) );
 	}
 
 	/**
@@ -38,12 +36,6 @@ class PedidosController extends Controller {
 		$product = '';
 
 		return view( 'admin.posts.create', compact( 'product' ) );
-	}
-
-	public function status() {
-		$product = '';
-
-		return view( 'cms.pedidos.producto.status', compact( 'product' ) );
 	}
 
 	/**
@@ -77,7 +69,7 @@ class PedidosController extends Controller {
 		} catch ( GuzzleException $e ) {
 			error_log( $e->getMessage() );
 		}
-		return view( 'cms.pedidos.producto.show', compact( 'product' ) );
+		return view( 'cms.pago.iva.show', compact( 'product' ) );
 	}
 
 	/**
@@ -98,7 +90,7 @@ class PedidosController extends Controller {
 		} catch ( GuzzleException $e ) {
 			error_log( $e->getMessage() );
 		}
-		return view( 'cms.pedidos.producto.edit', compact( 'product' ) );
+		return view( 'cms.pago.iva.edit', compact( 'product' ) );
 	}
 
 	/**
