@@ -13,9 +13,8 @@
 
 // require '../vendor/autoload.php';
 Route::get( '/', function () {
-	return redirect()->route('home');
+	return redirect()->route('index');
 } );
-Route::get('/home', 'HomeController@index')->name('home');
 Route::get( '/index', 'IndexController@show' )->name( 'index' );
 
 Route::get( 'usuarios/history', 'UsuariosController@history' )->name('usuarios_history');
@@ -23,7 +22,10 @@ Route::get( 'usuarios/todos', 'UsuariosController@all' )->name('usuarios_todos')
 
 Route::get( 'pedidos/status', 'PedidosController@status' )->name('pedidos_status');
 
-Route::get( 'login', '@status' )->name('pedidos_status');
+Route::get( 'login', 'UsuarioLoginController@showLogin' )->name('usuario_show_login');
+Route::post( 'user/login', 'UsuarioLoginController@login' )->name('usuario_login');
+Route::get( 'register', 'UsuarioLoginController@showRegister' )->name('usuario_show_register');
+Route::get( 'user/register', 'UsuarioLoginController@register' )->name('usuario_register');
 
 Route::resource( 'producto', 'ProductoController' );
 Route::resource( 'categoria', 'CategoriaController' );

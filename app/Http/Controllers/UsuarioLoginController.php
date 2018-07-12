@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\RequestOptions;
 use Illuminate\Http\Request;
 
 class UsuarioLoginController extends Controller {
@@ -25,6 +26,47 @@ class UsuarioLoginController extends Controller {
 		}
 
 		return view( 'cms.pago.iva.index', compact( 'products' ) );
+	}
+
+	public function showLogin() {
+		return view( 'cms.login' );
+	}
+
+	public function showRegister() {
+		$client = new Client( [
+			'base_uri' => 'http://165.227.96.113:5010',
+			'timeout'  => 2.0,
+		] );
+		try {
+			$response = $client->request( 'GET', '/api/users/levelusers' );
+			$nivel    = $response->getStatusCode() == 200 ? json_decode( $response->getBody()->getContents() ) : '';
+
+			return view( 'cms.register', compact( $nivel ) );
+		} catch ( GuzzleException $e ) {
+			error_log( $e->getMessage() );
+		}
+	}
+
+	public function register() {
+
+	}
+
+	public function login( Request $request ) {
+		$client   = new Client( [
+			'base_uri' => 'http://165.227.96.113:5010',
+			'timeout'  => 2.0,
+		] );
+		$response = $client->post(
+			'/api/users/login',
+			[
+				RequestOptions::JSON =>
+					[ 'email' => $request->input( 'email' ), 'contrasehna' => $request->input( 'contrasehna' ), ]
+			]
+		);
+
+		$responseJSON = json_decode( $response->getBody(), true );
+		return view('cms.register', compact($response));
+		// session('user_start');
 	}
 
 	/**
@@ -65,10 +107,11 @@ class UsuarioLoginController extends Controller {
 		] );
 		try {
 			$response = $client->request( 'GET', '/posts/' . $id );
-			$product = json_decode( $response->getBody()->getContents() );
+			$product  = json_decode( $response->getBody()->getContents() );
 		} catch ( GuzzleException $e ) {
 			error_log( $e->getMessage() );
 		}
+
 		return view( 'cms.pago.iva.show', compact( 'product' ) );
 	}
 
@@ -86,10 +129,11 @@ class UsuarioLoginController extends Controller {
 		] );
 		try {
 			$response = $client->request( 'GET', '/posts/' . $id );
-			$product = json_decode( $response->getBody()->getContents() );
+			$product  = json_decode( $response->getBody()->getContents() );
 		} catch ( GuzzleException $e ) {
 			error_log( $e->getMessage() );
 		}
+
 		return view( 'cms.pago.iva.edit', compact( 'product' ) );
 	}
 

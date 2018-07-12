@@ -20,7 +20,7 @@
 </head>
 <body>
 <div id="app">
-    @auth()
+    @if(session('user_start'))
         <div class="sidenav-custom">
             <a href="{{ url('/') }}">Inicio</a>
             <button class="dropdown-btn-custom">Catálogo
@@ -53,7 +53,8 @@
                 <a href="{{route('pedidos.index')}}">Crear</a>
                 <a href="{{route('pedidos_status')}}">Status</a>
                 <a href="{{route('pedidos.index')}}">Todos</a>
-            </div><button class="dropdown-btn-custom">Usuarios
+            </div>
+            <button class="dropdown-btn-custom">Usuarios
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
@@ -70,13 +71,13 @@
                 <a href="{{route('manual.index')}}">Manual</a>
             </div>
         </div>
-    @endauth
+    @endif
     <div class="custom-container d-flex justify-content-between">
-        @auth()
-            <div class="container-left"></div>@endauth
+        @if(session('user_start'))
+            <div class="container-left"></div>@endif
     <!-- /. NAV TOP  -->
         <div style="flex: 1">
-            @auth()
+            @if(session('user_start'))
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-0">
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Fabin') }}
@@ -96,14 +97,14 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                                    data-toggle="dropdown"
                                    aria-haspopup="true" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{--{{ Auth::user()->name }} <span class="caret"></span>--}}
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a href="{{ route('logout') }}" class="dropdown-item"
+                                    <a href="{{--{{ route('logout') }}--}}" class="dropdown-item"
                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         Logout
                                     </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    <form id="logout-form" action="{{--{{ route('logout') }}--}}" method="POST"
                                           style="display: none;">
                                         {{ csrf_field() }}
                                     </form>
@@ -112,7 +113,7 @@
                         </ul>
                     </div>
                 </nav>
-            @endauth
+            @endif
             @yield('content')
         </div>
     </div>
