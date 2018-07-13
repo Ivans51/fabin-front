@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\RequestOptions;
 use Illuminate\Http\Request;
+use Psr\Http\Message\ResponseInterface;
 
 class UsuarioLoginController extends Controller {
 	/**
@@ -14,8 +17,7 @@ class UsuarioLoginController extends Controller {
 	 */
 	public function index() {
 		$client = new Client( [
-			'base_uri' => 'https://jsonplaceholder.typicode.com',
-			'timeout'  => 2.0,
+			'base_uri' => 'https://jsonplaceholder.typicode.com'
 		] );
 		try {
 			$response = $client->request( 'GET', '/posts' );
@@ -39,8 +41,9 @@ class UsuarioLoginController extends Controller {
 		try {
 			$response = $client->request( 'GET', '/api/users/levelusers' );
 			$nivel    = $response->getStatusCode() == 200 ? json_decode( $response->getBody()->getContents() ) : '';
+			$response = 'Ivans';
 
-			return view( 'cms.register', compact( $nivel ) );
+			return view( 'cms.register', compact( 'nivel', 'response' ) );
 		} catch ( GuzzleException $e ) {
 			error_log( $e->getMessage() );
 		}
@@ -51,19 +54,53 @@ class UsuarioLoginController extends Controller {
 	}
 
 	public function login( Request $request ) {
-		$client = new Client(['base_uri' => 'http://165.227.96.113:5010']);
+		$client   = new Client([
+			// Base URI is used with relative requests
+			'base_uri' => 'http://165.227.96.113:5010/',
+			// You can set any number of default request options.
+			'timeout'  => 2.0,
+		]);
+		/*$payload  = file_get_contents( '/my-data.xml' );*/
+		$email    = $request->input( 'email' );
+		$clave    = $request->input( 'contrasehna' );
 		try {
-			$response     = $client->request( 'POST', '/api/users/login', [
+			$promise = $client->requestAsync( 'POST', 'api/users/login', [
 				'form_params' => [
-					'email'       => $request->input( 'email' ),
-					'contrasehna' => $request->input( 'contrasehna' )
+					'email'       => 'robertelias64@gmail.com',
+					'contrasehna' => 'motorola'
 				]
 			] );
-			$responseJSON = json_decode( $response->getBody(), true );
-
-			return view( 'cms.register', compact( $response ) );
+			$promise->then(
+				function (ResponseInterface $res) {
+					echo $res;
+					echo 'IVans';
+					/*echo $res->getStatusCode() . "\n";*/
+				},
+				function (RequestException $e) {
+					echo $e;
+					echo 'IVans';
+					/*echo $e->getMessage() . "\n";
+					echo $e->getRequest()->getMethod();*/
+				}
+			);
+			/*var_dump($promise);*/
 		} catch ( GuzzleException $e ) {
 		}
+		/*$promise = $client->postAsync( '/api/users/login', [
+			RequestOptions::JSON => [
+				'email'       => $email,
+				'contrasehna' => $clave
+			]
+		] );
+		$promise->then(
+			function (ResponseInterface $res) {
+				echo $res->getStatusCode() . "\n";
+			},
+			function (RequestException $e) {
+				echo $e->getMessage() . "\n";
+				echo $e->getRequest()->getMethod();
+			}
+		);*/
 		// session('user_start');
 	}
 

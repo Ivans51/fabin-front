@@ -1,13 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container" style="background: #1b1e21; padding: 10px; color: white;">
+    @push('styles')
+        <link href="{{ asset('css/login.css') }}" rel="stylesheet">
+    @endpush
+    <div class="container login-container">
         <div class="panel panel-default">
-            <div class="panel-heading mt-3 mb-3 text-center"><h3>Login</h3></div>
-
+            <div class="panel-heading mt-3 mb-3 text-center d-flex justify-content-around">
+                <img src="{{URL::asset('img/logo.png')}}" alt="profile Pic" height="100" width="100">
+                <h3 class="align-self-center">Login</h3>
+            </div>
             <div class="panel-body">
                 <form class="form-horizontal" method="POST" action="{{route('usuario_login') }}">
-
+                    {{ csrf_field() }}
                     <div class="form-group">
                         <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
@@ -51,15 +56,15 @@
 
                     <div class="form-group">
                         <div class="col-md-8 col-md-offset-4">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-dark">
                                 Login
                             </button>
 
-                            <a class="btn btn-link" href="#">
+                            <a class="btn btn-dark" href="#">
                                 Recordar contraseña
                             </a>
 
-                            <a class="btn btn-link" href="{{ route('usuario_register') }}">
+                            <a class="btn btn-dark" href="{{ route('usuario_register') }}">
                                 Registrar
                             </a>
                         </div>

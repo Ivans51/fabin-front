@@ -1,6 +1,9 @@
 body {
     font-family: 'Open Sans', sans-serif;
 }
+* {
+    outline: none;
+}
 
 #wrapper {
     width: 100%;
@@ -293,7 +296,7 @@ p {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color: #35495e;
     overflow-x: hidden;
     padding-top: 20px;
 }
@@ -302,32 +305,34 @@ p {
 .sidenav-custom a, .dropdown-btn-custom {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
-    font-size: 20px;
-    color: #818181;
+    color: #fff;
     display: block;
     border: none;
+    font-size: 0.95rem;
+    margin: 2% 0;
     background: none;
+    outline: none;
     width: 100%;
     text-align: left;
     cursor: pointer;
-    outline: none;
+    text-transform: uppercase;
 }
 
 /* On mouse-over */
 .sidenav-custom a:hover, .dropdown-btn-custom:hover {
-    color: #f1f1f1;
+    color: #eb5e28;
 }
 
 /* Add an active class to the active dropdown button */
 .sidenav-custom .active {
-    background-color: green;
+    background-color: #213142;
     color: white;
 }
 
 /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
 .dropdown-container {
     display: none;
-    background-color: #262626;
+    background-color: #2b3c4f;
     padding-left: 8px;
 }
 
