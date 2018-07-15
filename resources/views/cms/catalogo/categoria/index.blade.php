@@ -15,14 +15,11 @@
             <!-- Modal content -->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3>Modal Header</h3>
+                    <h3>Añadir Producto</h3>
                     <span class="close">&times;</span>
                 </div>
                 <div class="modal-body">
                     @include('cms.catalogo.categoria.create', ['product' => 'hello'])
-                </div>
-                <div class="modal-footer">
-                    <h3>Modal Footer</h3>
                 </div>
             </div>
         </div>

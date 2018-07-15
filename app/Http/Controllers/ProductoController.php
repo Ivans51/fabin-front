@@ -13,16 +13,7 @@ class ProductoController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		$client = new Client( [
-			'base_uri' => 'https://jsonplaceholder.typicode.com',
-			'timeout'  => 2.0,
-		] );
-		try {
-			$response = $client->request( 'GET', '/posts' );
-			$products = json_decode( $response->getBody()->getContents() );
-		} catch ( GuzzleException $e ) {
-			error_log( $e->getMessage() );
-		}
+
 
 		return view( 'cms.catalogo.producto.index', compact( 'products' ) );
 	}
@@ -59,16 +50,7 @@ class ProductoController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function show( $id ) {
-		$client = new Client( [
-			'base_uri' => 'https://jsonplaceholder.typicode.com',
-			'timeout'  => 2.0,
-		] );
-		try {
-			$response = $client->request( 'GET', '/posts/' . $id );
-			$product = json_decode( $response->getBody()->getContents() );
-		} catch ( GuzzleException $e ) {
-			error_log( $e->getMessage() );
-		}
+
 		return view( 'cms.catalogo.producto.show', compact( 'product' ) );
 	}
 
@@ -80,16 +62,7 @@ class ProductoController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit( $id ) {
-		$client = new Client( [
-			'base_uri' => 'https://jsonplaceholder.typicode.com',
-			'timeout'  => 2.0,
-		] );
-		try {
-			$response = $client->request( 'GET', '/posts/' . $id );
-			$product = json_decode( $response->getBody()->getContents() );
-		} catch ( GuzzleException $e ) {
-			error_log( $e->getMessage() );
-		}
+
 		return view( 'cms.catalogo.producto.edit', compact( 'product' ) );
 	}
 

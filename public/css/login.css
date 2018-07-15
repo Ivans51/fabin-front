@@ -1,11 +1,12 @@
 .login-container {
-    background: #5865ff;
+    background: #35495E;
     border-radius: 2%;
-    padding: 10px;
     color: white;
-    margin: auto;
+    margin-top: 0%;
+    max-width: 700px !important;
+    padding: 10px;
 }
 
 body {
-    background: #f8e9ff !important;
+    background: #3f3f3f !important;
 }

@@ -1,68 +1,40 @@
-{{ Form::hidden('user_id', '') }}
-
 <div class="form-group">
-	{{ Form::label('category_id', 'Categorías') }}
-	{{--{{ Form::select('category_id', $categories, null, ['class' => 'form-control']) }}--}}
-</div> 
-<div class="form-group">
-    {{ Form::label('name', 'Nombre de la etiqueta') }}
-    {{ Form::text('name', null, ['class' => 'form-control', 'id' => 'name']) }}
+    {{ Form::label('nombre', 'Nombre del producto') }}
+    {{ Form::text('nombre', null, ['class' => 'form-control', 'id' => 'nombre']) }}
 </div>
 <div class="form-group">
-    {{ Form::label('slug', 'URL amigable') }}
-    {{ Form::text('slug', null, ['class' => 'form-control', 'id' => 'slug']) }}
+    {{ Form::label('imagen', 'Imagen') }}
+    {{ Form::file('imagen') }}
 </div>
 <div class="form-group">
-    {{ Form::label('image', 'Imagen') }}
-    {{ Form::file('image') }}
+    {{ Form::label('estado', 'Estado') }}
+    <label>
+        {{ Form::radio('estado', '1') }} Publicado
+    </label>
+    <label>
+        {{ Form::radio('estado', '0') }} No Publicado
+    </label>
 </div>
 <div class="form-group">
-	{{ Form::label('slug', 'Estado') }}
-	<label>
-		{{ Form::radio('status', 'PUBLISHED') }} Publicado
-	</label>
-	<label>
-		{{ Form::radio('status', 'DRAFT') }} Borrador
-	</label>
+    {{ Form::label('id_category', 'Categorías') }}
+    {{ Form::select('id_category', $categories, null, ['class' => 'form-control']) }}
 </div>
 <div class="form-group">
-	{{ Form::label('tags', 'Etiquetas') }}
-	<div>
-	{{--@foreach($tags as $tag)
-		<label>
-			{{ Form::checkbox('tags[]', $tag->id) }} {{ $tag->name }}
-		</label>
-	@endforeach--}}
-	</div>
+    {{ Form::label('id_proveedor', 'Proveedores') }}
+    {{ Form::select('id_proveedor', $proveedores, null, ['class' => 'form-control']) }}
 </div>
 <div class="form-group">
-    {{ Form::label('excerpt', 'Extracto') }}
-    {{ Form::textarea('excerpt', null, ['class' => 'form-control', 'rows' => '2']) }}
+    {{ Form::label('id_unidad', 'Unidad de medida') }}
+    {{ Form::select('id_unidad', $unidades, null, ['class' => 'form-control']) }}
 </div>
 <div class="form-group">
-    {{ Form::label('body', 'Descripción') }}
-    {{ Form::textarea('body', null, ['class' => 'form-control']) }}
+    {{ Form::label('id_stock', 'Stock') }}
+    {{ Form::select('id_stock', $stock, null, ['class' => 'form-control']) }}
+</div>
+<div class="form-group">
+    {{ Form::label('id_impuesto', 'IVA') }}
+    {{ Form::text('id_impuesto', null, ['class' => 'form-control']) }}
 </div>
 <div class="form-group">
     {{ Form::submit('Guardar', ['class' => 'btn btn-sm btn-primary']) }}
 </div>
-
-{{--
-@section('scripts')
-<script src="{{ asset('vendor/stringToSlug/jquery.stringToSlug.min.js') }}"></script>
-<script src="{{ asset('vendor/ckeditor/ckeditor.js') }}"></script>
-<script>
-	$(document).ready(function(){
-	    $("#name, #slug").stringToSlug({
-	        callback: function(text){
-	            $('#slug').val(text);
-	        }
-	    });
-
-	    CKEDITOR.config.height = 400;
-		CKEDITOR.config.width  = 'auto';
-
-		CKEDITOR.replace('body');
-	});
-</script>
-@endsection--}}

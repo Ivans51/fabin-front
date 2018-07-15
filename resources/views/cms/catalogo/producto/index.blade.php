@@ -44,22 +44,22 @@
                             <tbody>
                             @foreach($products as $product)
                                 <tr>
-                                    <td>{{ $product->id }}</td>
-                                    <td>{{ $product->title }}</td>
+                                    {{--<td>{{ $product->id }}</td>
+                                    <td>{{ $product->title }}</td>--}}
                                     <td width="10px">
-                                        <a href="{{ route('producto.show', $product->id) }}"
-                                           class="btn btn-sm btn-default">Ver</a>
+                                        {{--<a href="{{ route('producto.show', $product->id) }}"
+                                           class="btn btn-sm btn-default">Ver</a>--}}
                                     </td>
                                     <td width="10px">
-                                        <a href="{{ route('producto.edit', $product->id) }}"
-                                           class="btn btn-sm btn-default">Editar</a>
+                                        {{--<a href="{{ route('producto.edit', $product->id) }}"
+                                           class="btn btn-sm btn-default">Editar</a>--}}
                                     </td>
                                     <td width="10px">
-                                        {!! Form::open(['route' => ['producto.destroy', $product->id], 'method' => 'DELETE']) !!}
+                                        {{--{!! Form::open(['route' => ['producto.destroy', $product->id], 'method' => 'DELETE']) !!}
                                         <button class="btn btn-sm btn-danger">
                                             Eliminar
                                         </button>
-                                        {!! Form::close() !!}
+                                        {!! Form::close() !!}--}}
                                     </td>
                                 </tr>
                             @endforeach

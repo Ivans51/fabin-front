@@ -13,18 +13,7 @@ class PedidosController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		$status = 0;
-		$client = new Client( [
-			'base_uri' => 'https://jsonplaceholder.typicode.com',
-			'timeout'  => 2.0,
-		] );
-		try {
-			$response = $client->request( 'GET', '/posts' );
-			$products = json_decode( $response->getBody()->getContents() );
-			$status = $response->getStatusCode();
-		} catch ( GuzzleException $e ) {
-			error_log( $e->getMessage() );
-		}
+
 
 		return $status == 200 ? view( 'cms.pedidos.producto.index', compact( 'products' ) ) : abort( 404 );
 	}
@@ -67,16 +56,7 @@ class PedidosController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function show( $id ) {
-		$client = new Client( [
-			'base_uri' => 'https://jsonplaceholder.typicode.com',
-			'timeout'  => 2.0,
-		] );
-		try {
-			$response = $client->request( 'GET', '/posts/' . $id );
-			$product = json_decode( $response->getBody()->getContents() );
-		} catch ( GuzzleException $e ) {
-			error_log( $e->getMessage() );
-		}
+
 		return view( 'cms.pedidos.producto.show', compact( 'product' ) );
 	}
 
@@ -88,16 +68,7 @@ class PedidosController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit( $id ) {
-		$client = new Client( [
-			'base_uri' => 'https://jsonplaceholder.typicode.com',
-			'timeout'  => 2.0,
-		] );
-		try {
-			$response = $client->request( 'GET', '/posts/' . $id );
-			$product = json_decode( $response->getBody()->getContents() );
-		} catch ( GuzzleException $e ) {
-			error_log( $e->getMessage() );
-		}
+
 		return view( 'cms.pedidos.producto.edit', compact( 'product' ) );
 	}
 

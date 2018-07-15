@@ -13,18 +13,12 @@ class UsuariosController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		$client = new Client( [
-			'base_uri' => 'https://jsonplaceholder.typicode.com',
-			'timeout'  => 2.0,
-		] );
-		try {
-			$response = $client->request( 'GET', '/posts' );
-			$products = json_decode( $response->getBody()->getContents() );
-		} catch ( GuzzleException $e ) {
-			error_log( $e->getMessage() );
-		}
-
-		return view( 'cms.usuarios.detalles.index', compact( 'products' ) );
+        $client = new Client(['base_uri' => 'http://165.227.96.113:5010']);
+        /*$response = $client->request( 'GET', '/api/users/levelusers' );
+        $nivel    = $response->getStatusCode() == 200 ? json_decode( $response->getBody()->getContents() ) : '';*/
+        $response = 'Ivans';
+        $nivel = 'Pedro';
+        return view('cms.register', compact('nivel', 'response'));
 	}
 
 	/**
@@ -39,35 +33,13 @@ class UsuariosController extends Controller {
 	}
 
 	public function history() {
-		$status = 0;
-		$client = new Client( [
-			'base_uri' => 'https://jsonplaceholder.typicode.com',
-			'timeout'  => 2.0,
-		] );
-		try {
-			$response = $client->request( 'GET', '/posts' );
-			$products = json_decode( $response->getBody()->getContents() );
-			$status = $response->getStatusCode();
-		} catch ( GuzzleException $e ) {
-			error_log( $e->getMessage() );
-		}
+
 
 		return $status == 200 ? view( 'cms.usuarios.detalles.history', compact( 'products' ) ) : abort( 404 );
 	}
 
 	public function all() {
-		$status = 0;
-		$client = new Client( [
-			'base_uri' => 'https://jsonplaceholder.typicode.com',
-			'timeout'  => 2.0,
-		] );
-		try {
-			$response = $client->request( 'GET', '/posts' );
-			$products = json_decode( $response->getBody()->getContents() );
-			$status = $response->getStatusCode();
-		} catch ( GuzzleException $e ) {
-			error_log( $e->getMessage() );
-		}
+
 
 		return $status == 200 ? view( 'cms.usuarios.detalles.todos', compact( 'products' ) ) : abort( 404 );
 	}
