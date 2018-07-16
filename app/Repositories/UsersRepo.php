@@ -20,6 +20,10 @@ class UsersRepo extends GuzzleHTTPRequest
     }
 
     public function loginUser($arr) {
-        return $this->postUser($arr);
+        return $this->postUser($arr, '/api/users/login');
+    }
+
+    public function registerUser($arr) {
+        return $this->postUser($arr, '/api/users/register/onlyuser');
     }
 }

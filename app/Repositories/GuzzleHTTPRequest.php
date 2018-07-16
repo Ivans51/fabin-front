@@ -36,10 +36,10 @@ class GuzzleHTTPRequest
         return json_decode($response->getBody()->getContents());
     }
 
-    public function postUser($arr)
+    public function postUser($arr, $uri)
     {
         try {
-            $response = $this->client->request('POST', '/api/users/login', [
+            $response = $this->client->request('POST', $uri, [
                 'form_params' => $arr
             ]);
             $res = json_decode($response->getBody()->getContents());
@@ -50,6 +50,11 @@ class GuzzleHTTPRequest
     }
 
     public function getView(int $status, $view, $var)
+    {
+        return $status == 200 ? view($view, compact($var)) : abort(404);
+    }
+
+    public function getViewInfo(int $status, $view, $var)
     {
         return $status == 200 ? view($view, compact($var)) : abort(404);
     }

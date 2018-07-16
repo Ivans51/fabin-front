@@ -86,7 +86,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="alert alert-success">
+                            <div class="alert alert-info">
                                 {{ session('info') }}
                             </div>
                         </div>

@@ -59,9 +59,8 @@ class UsuarioLoginController extends Controller
         $res = $this->repo->loginUser($arr);
         if ($res->StatusCode != null) {
             if ($res->StatusCode == 200) {
-                $token = $res->Data->token;
-                session(['user_token' => $token]);
-                return view('cms.charts.index', compact('token'));
+                session(['user_token' => $res->Data->token]);
+                return view('cms.charts.index');
             } else {
                 session()->flash('info', 'Datos erroneos');
                 return view('cms.login');
