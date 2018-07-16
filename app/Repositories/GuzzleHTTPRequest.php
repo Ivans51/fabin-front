@@ -34,7 +34,7 @@ class GuzzleHTTPRequest {
 		return json_decode( $response->getBody()->getContents() );
 	}
 
-	public function postHeader( $arr, $uri, $method ) {
+	public function doRequestHeader( $arr, $uri, $method ) {
 		try {
 			$response = $this->client->request( $method, $uri, [
 				'headers'     => [ 'autorizacion' => session( 'user_token' ) ],

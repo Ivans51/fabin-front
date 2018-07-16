@@ -68,14 +68,14 @@ class UsuarioLoginController extends Controller {
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function statusRegister( $res ) {
-		if ( $res->StatusCode != null ) {
-			if ( $res->StatusCode == 200 ) {
-				return $this->repo->getViewInfo( 'cms.register', 'Usuario Registrado', $this->getNivel() );
-			} else {
-				return $this->repo->getViewInfo( 'cms.register', 'Usuario Registrado', $this->getNivel() );
-			}
+		if ( is_string( $res ) ) {
+			return $this->repo->getViewInfo( 'cms.register', 'Usuario Registrado', array( 'nivelValue' => $this->getNivel() ) );
 		} else {
-			return $this->repo->getViewInfo( 'cms.register', 'Usuario Registrado', $this->getNivel() );
+			if ( $res->StatusCode == 200 ) {
+				return $this->repo->getViewInfo( 'cms.register', 'Usuario Registrado', array( 'nivelValue' => $this->getNivel() ) );
+			} else {
+				return $this->repo->getViewInfo( 'cms.register', 'Usuario Registrado', array( 'nivelValue' => $this->getNivel() )  );
+			}
 		}
 	}
 
@@ -99,8 +99,9 @@ class UsuarioLoginController extends Controller {
 	}
 
 	public function showReset() {
-		$user = session('user_info')->user;
-		return view( 'cms.usuarios.detalles.show', compact('user') );
+		$user = session( 'user_info' )->user;
+
+		return view( 'cms.usuarios.detalles.show', compact( 'user' ) );
 	}
 
 	public function reset( Request $request ) {

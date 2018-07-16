@@ -23,7 +23,7 @@
 <div id="app">
     @if(session('user_token'))
         <div class="sidenav-custom">
-            <div class="d-flex justify-content-center mb-5 mt-3">
+            <div class="d-flex justify-content-center mb-3 mt-1">
                 <img src="{{URL::asset('img/logo.png')}}" alt="profile Pic" height="100" width="100" class="">
             </div>
             <a href="{{ url('/') }}"><i class="fas fa-home pr-2"></i>Inicio</a>
@@ -104,5 +104,7 @@
 <script src="{{ asset('js/dropdown.js') }}"></script>
 {{--<script src="{{ asset('js/effect-dropdown.js') }}"></script>--}}
 <script src="{{ asset('js/effect-modal.js') }}"></script>
+<script src="{{ asset('js/Chart.min.js') }}" charset="utf-8"></script>
+ {!! $chart->script() !!}
 </body>
 </html>

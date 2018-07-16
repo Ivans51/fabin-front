@@ -2,20 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
+use App\Repositories\AuditoriaRepo;
 use Illuminate\Http\Request;
 
 class AuditoriaController extends Controller {
+
+	protected $repo;
+
+	/**
+	 * AuditoriaController constructor.
+	 *
+	 * @param $repo
+	 */
+	public function __construct( AuditoriaRepo $repo ) {
+		$this->repo = $repo;
+	}
+
+
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
+		$auditoria = $this->repo->indexAuditoria();
 
-
-		return view( 'cms.operaciones.auditoria.index', compact( 'products' ) );
+		return view( 'cms.operaciones.auditoria.index', compact( 'auditoria' ) );
 	}
 
 	/**

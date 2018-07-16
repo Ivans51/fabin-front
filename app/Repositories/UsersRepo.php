@@ -24,7 +24,7 @@ class UsersRepo extends GuzzleHTTPRequest
     }
 
     public function registerUser($arr) {
-        return $this->postHeader( $arr, '/api/users/register/onlyuser', 'POST' );
+        return $this->doRequestHeader( $arr, '/api/users/register/onlyuser', 'POST' );
     }
 
     public function resetUser($arr, $id) {

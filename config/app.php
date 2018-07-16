@@ -141,6 +141,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+	    ConsoleTVs\Charts\ChartsServiceProvider::class,
 	    Collective\Html\HtmlServiceProvider::class,
 	    Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
