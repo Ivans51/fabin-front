@@ -1,12 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    {{--<div class="panel-heading dropdown-effect mb-3">
-        <button class="accordion">Crear nuevo producto</button>
-        <div class="panel-accordion">
-            @include('cms.catalogo.productos-create', ['post' => 'hello'])
-        </div>
-    </div>--}}
+
     <div class="panel-heading modal-effect mb-3">
         <!-- Trigger/Open The Modal -->
         <button id="myBtn" class="accordion">Historial de compras</button>

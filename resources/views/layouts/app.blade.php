@@ -50,6 +50,7 @@
                 <a href="{{route('ventas.index')}}">Detalles</a>
             </div>
             <a href="{{route('clientes.index')}}"><i class="fas fa-address-book pr-2"></i>Clientes</a>
+            <a href="{{route('proveedor.index')}}"><i class="fas fa-address-book pr-2"></i>Proveedores</a>
             <button class="dropdown-btn-custom"><i class="fas fa-shipping-fast pr-2"></i>Pedidos
                 <i class="fa fa-caret-down"></i>
             </button>
@@ -62,8 +63,8 @@
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
-                <a href="{{route('usuarios.index')}}">Crear</a>
-                <a href="{{route('usuarios_history')}}">Historial</a>
+                <a href="{{route('usuario_show_register')}}">Crear Usuario</a>
+                <a href="{{route('usuario_show_reset')}}">Cambiar mi Clave</a>
                 <a href="{{route('usuarios_todos')}}">Todos</a>
             </div>
             <button class="dropdown-btn-custom"><i class="fas fa-users-cog pr-2"></i>Operaciones

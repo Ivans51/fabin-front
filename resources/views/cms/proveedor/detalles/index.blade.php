@@ -14,7 +14,7 @@
                     <span class="close">&times;</span>
                 </div>
                 <div class="modal-body">
-                    @include('cms.pago.preferencias.create', ['product' => 'hello'])
+                    @include('cms.proveedor.detalles.partials.form')
                 </div>
                 <div class="modal-footer">
                     <h3>Modal Footer</h3>

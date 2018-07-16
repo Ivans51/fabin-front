@@ -9,7 +9,7 @@
                 <div class="panel-body">
                     {!! Form::model($product, ['route' => ['producto.update', $product], 'method' => 'PUT', 'files' => true]) !!}
 
-                    @include('cms.catalogo.producto.partials.form')
+                    @include(')
 
                     {!! Form::close() !!}
                 </div>

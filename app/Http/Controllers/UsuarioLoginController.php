@@ -3,170 +3,120 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\UsersRepo;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 
-class UsuarioLoginController extends Controller
-{
-    protected $repo;
+class UsuarioLoginController extends Controller {
+	protected $repo;
 
-    /**
-     * UsuarioLoginController constructor.
-     * @param UsersRepo $repo
-     */
-    public function __construct(UsersRepo $repo)
-    {
-        $this->repo = $repo;
-    }
+	/**
+	 * UsuarioLoginController constructor.
+	 *
+	 * @param UsersRepo $repo
+	 */
+	public function __construct( UsersRepo $repo ) {
+		$this->repo = $repo;
+	}
 
+	public function showLogin() {
+		return view( 'cms.login' );
+	}
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $products = $this->repo->indexUser();
+	public function login( Request $request ) {
+		$arr = [
+			'email'       => $request->input( 'email' ),
+			'contrasenha' => $request->input( 'contrasenha' )
+		];
+		$res = $this->repo->loginUser( $arr );
+		if ( $res->StatusCode != null ) {
+			if ( $res->StatusCode == 200 ) {
+				session( [ 'user_token' => $res->Data->token ] );
+				session( [ 'user_info' => $res->Data ] );
 
-        return view('cms.pago.iva.index', compact('products'));
-    }
+				return view( 'cms.charts.index' );
+			} else {
+				return $this->repo->getViewInfo( 'cms.login', 'Datos errones', [] );
+			}
+		} else {
+			return $this->repo->getViewInfo( 'cms.login', 'Datos errones', [] );
+		}
+	}
 
-    public function showLogin()
-    {
-        return view('cms.login');
-    }
+	public function register( Request $request ) {
+		$confirm  = $request->input( 'contrasenha_confirm' );
+		$email    = $request->input( 'email' );
+		$clave    = $request->input( 'contrasenha' );
+		$id_nivel = $request->input( 'nivel' );
+		if ( $confirm == $clave && $id_nivel != 0 ) {
+			$arr = [
+				'email'                   => $email,
+				'contrasenha'             => $clave,
+				'id_usuario_tipo_usuario' => $id_nivel
+			];
+			$res = $this->repo->registerUser( $arr );
 
-    public function showRegister()
-    {
-        $nivel = $this->repo->nivelUser();
-        $response = 'Ivans';
-        return view('cms.register', compact('nivel', 'response'));
-    }
+			return $this->statusRegister( $res );
+		} else {
+			session()->flash( 'info', 'Datos erroneos' );
 
-    public function register()
-    {
+			return $this->showRegister();
+		}
+	}
 
-    }
+	/**
+	 * @param $res
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function statusRegister( $res ) {
+		if ( $res->StatusCode != null ) {
+			if ( $res->StatusCode == 200 ) {
+				return $this->repo->getViewInfo( 'cms.register', 'Usuario Registrado', $this->getNivel() );
+			} else {
+				return $this->repo->getViewInfo( 'cms.register', 'Usuario Registrado', $this->getNivel() );
+			}
+		} else {
+			return $this->repo->getViewInfo( 'cms.register', 'Usuario Registrado', $this->getNivel() );
+		}
+	}
 
-    public function login(Request $request)
-    {
-        $arr = [
-            'email' => $request->input('email'),
-            'contrasenha' => $request->input('contrasenha')
-        ];
-        $res = $this->repo->loginUser($arr);
-        if ($res->StatusCode != null) {
-            if ($res->StatusCode == 200) {
-                session(['user_token' => $res->Data->token]);
-                return view('cms.charts.index');
-            } else {
-                session()->flash('info', 'Datos erroneos');
-                return view('cms.login');
-            }
-        } else {
-            session()->flash('info', 'Datos erroneos');
-            return view('cms.login');
-        }
-    }
+	/**
+	 * @return array
+	 */
+	public function getNivel(): array {
+		$nivel      = $this->repo->nivelUser()->Data;
+		$nivelValue = array( 'Seleccionar' );
+		for ( $i = 0; $i < count( $nivel ); $i ++ ) {
+			$nivelValue[] = $nivel[ $i ]->descripcion;
+		}
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $product = '';
+		return $nivelValue;
+	}
 
-        return view('admin.posts.create', compact('product'));
-    }
+	public function showRegister() {
+		$nivelValue = $this->getNivel();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $post = '';
+		return view( 'cms.register', compact( 'nivelValue' ) );
+	}
 
-        return redirect()->route('posts.edit', $post->id)->with('info', 'Entrada creada con éxito');
-    }
+	public function showReset() {
+		$user = session('user_info')->user;
+		return view( 'cms.usuarios.detalles.show', compact('user') );
+	}
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $client = new Client([
-            'base_uri' => 'https://jsonplaceholder.typicode.com',
-            'timeout' => 2.0,
-        ]);
-        try {
-            $response = $client->request('GET', '/posts/' . $id);
-            $product = json_decode($response->getBody()->getContents());
-        } catch (GuzzleException $e) {
-            error_log($e->getMessage());
-        }
-
-        return view('cms.pago.iva.show', compact('product'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $client = new Client([
-            'base_uri' => 'https://jsonplaceholder.typicode.com',
-            'timeout' => 2.0,
-        ]);
-        try {
-            $response = $client->request('GET', '/posts/' . $id);
-            $product = json_decode($response->getBody()->getContents());
-        } catch (GuzzleException $e) {
-            error_log($e->getMessage());
-        }
-
-        return view('cms.pago.iva.edit', compact('product'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $post = $id;
-
-        return redirect()->route('posts.edit', $post->id)->with('info', 'Entrada actualizada con éxito');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        return back()->with('info', 'Eliminado correctamente');
-    }
+	public function reset( Request $request ) {
+		$arr = [
+			'email'       => $request->input( 'email' ),
+			'contrasenha' => $request->input( 'contrasenha' )
+		];
+		$res = $this->repo->resetUser( $arr, session( 'user_info' ) );
+		if ( $res->StatusCode != null ) {
+			if ( $res->StatusCode == 200 ) {
+				return $this->repo->getViewInfo( 'cms.login', 'Password Reset', [] );
+			} else {
+				return $this->repo->getViewInfo( 'cms.login', 'Datos errones', [] );
+			}
+		} else {
+			return $this->repo->getViewInfo( 'cms.login', 'Datos errones', [] );
+		}
+	}
 }

@@ -25,7 +25,9 @@ Route::get( 'pedidos/status', 'PedidosController@status' )->name('pedidos_status
 Route::get( 'login', 'UsuarioLoginController@showLogin' )->name('usuario_show_login');
 Route::post( 'user/login', 'UsuarioLoginController@login' )->name('usuario_login');
 Route::get( 'register', 'UsuarioLoginController@showRegister' )->name('usuario_show_register');
-Route::get( 'user/register', 'UsuarioLoginController@register' )->name('usuario_register');
+Route::post( 'user/register', 'UsuarioLoginController@register' )->name('usuario_register');
+Route::get( 'reset', 'UsuarioLoginController@showReset' )->name('usuario_show_reset');
+Route::put( 'user/reset', 'UsuarioLoginController@reset' )->name('usuario_reset');
 
 Route::resource( 'producto', 'ProductoController' );
 Route::resource( 'categoria', 'CategoriaController' );
@@ -37,6 +39,7 @@ Route::resource( 'preferencias', 'PreferenciaController' );
 
 Route::resource( 'ventas', 'VentasController' );
 Route::resource( 'clientes', 'ClientesController' );
+Route::resource( 'proveedor', 'ProveedorController' );
 Route::resource( 'usuarios', 'UsuariosController' );
 
 Route::resource( 'auditoria', 'AuditoriaController' );

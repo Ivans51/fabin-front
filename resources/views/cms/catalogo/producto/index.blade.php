@@ -19,7 +19,7 @@
                     <span class="close">&times;</span>
                 </div>
                 <div class="modal-body">
-                    @include('cms.catalogo.producto.create', ['product' => 'hello'])
+                    @include('cms.catalogo.producto.partials.form')
                 </div>
                 <div class="modal-footer">
                     <h3>Modal Footer</h3>
