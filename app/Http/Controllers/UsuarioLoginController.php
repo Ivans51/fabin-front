@@ -53,8 +53,8 @@ class UsuarioLoginController extends Controller {
 				'id_usuario_tipo_usuario' => $id_nivel
 			];
 			$res = $this->repo->registerUser( $arr );
-            $infoView = $this->repo->setInfoView('cms.register', 'Error en registro', 'Usuario Registrado');
-			return $this->repo->getView($res, $infoView, array( 'nivelValue' => $this->getNivel() ) );
+            $infoView = $this->repo->setInfoView('cms.register', 'Usuario Registrado', 'Error en registro');
+			return $this->repo->getView($res, $infoView, $this->getNivel() );
 		} else {
 			session()->flash( 'info', 'Datos erroneos' );
 

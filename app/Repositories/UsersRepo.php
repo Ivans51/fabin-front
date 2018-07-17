@@ -12,22 +12,22 @@ class UsersRepo extends GuzzleHTTPRequest
 {
 
     public function indexUser() {
-        return $this->get('/posts');
+        return $this->doRequest( '/posts', 'GET' );
     }
 
     public function nivelUser() {
-        return $this->get('/api/users/levelusers');
+        return $this->doRequest( '/api/users/levelusers', 'GET' );
     }
 
     public function loginUser($arr) {
-        return $this->doRequest( $arr, '/api/users/login', 'POST' );
+        return $this->doRequestBody( $arr, '/api/users/login', 'POST' );
     }
 
     public function registerUser($arr) {
-        return $this->doRequestHeader( $arr, '/api/users/register/onlyuser', 'POST' );
+        return $this->doRequestBodyHeader( $arr, '/api/users/register/onlyuser', 'POST' );
     }
 
     public function resetUser($arr, $id) {
-        return $this->doRequest( $arr, '/api/users/update/user/id/' . $id, 'PUT' );
+        return $this->doRequestBody( $arr, '/api/users/update/user/id/' . $id, 'PUT' );
     }
 }

@@ -43,7 +43,7 @@
                                 <label for="nivel" class="col-md-10 control-label">Nivel de usuario</label>
 
                                 <div class="col-md-12">
-                                    {{ Form::select('nivel', $nivelValue, null, ['class' => 'form-control']) }}
+                                    {{ Form::select('nivel', $data, null, ['class' => 'form-control']) }}
                                 </div>
                             </div>
 
