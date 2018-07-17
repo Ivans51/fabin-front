@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\SampleChart;
 use App\Repositories\UsersRepo;
 use Illuminate\Http\Request;
 
@@ -31,8 +32,7 @@ class UsuarioLoginController extends Controller {
 			if ( $res->StatusCode == 200 ) {
 				session( [ 'user_token' => $res->Data->token ] );
 				session( [ 'user_info' => $res->Data ] );
-
-				return view( 'cms.charts.index' );
+                return (new SampleChart())->chart();
 			} else {
 				return $this->repo->getViewInfo( 'cms.login', 'Datos errones', [] );
 			}
@@ -53,8 +53,8 @@ class UsuarioLoginController extends Controller {
 				'id_usuario_tipo_usuario' => $id_nivel
 			];
 			$res = $this->repo->registerUser( $arr );
-
-			return $this->statusRegister( $res );
+            $infoView = $this->repo->setInfoView('cms.register', 'Error en registro', 'Usuario Registrado');
+			return $this->repo->getView($res, $infoView, array( 'nivelValue' => $this->getNivel() ) );
 		} else {
 			session()->flash( 'info', 'Datos erroneos' );
 
@@ -62,22 +62,11 @@ class UsuarioLoginController extends Controller {
 		}
 	}
 
-	/**
-	 * @param $res
-	 *
-	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-	 */
-	public function statusRegister( $res ) {
-		if ( is_string( $res ) ) {
-			return $this->repo->getViewInfo( 'cms.register', 'Usuario Registrado', array( 'nivelValue' => $this->getNivel() ) );
-		} else {
-			if ( $res->StatusCode == 200 ) {
-				return $this->repo->getViewInfo( 'cms.register', 'Usuario Registrado', array( 'nivelValue' => $this->getNivel() ) );
-			} else {
-				return $this->repo->getViewInfo( 'cms.register', 'Usuario Registrado', array( 'nivelValue' => $this->getNivel() )  );
-			}
-		}
-	}
+    public function showRegister() {
+        $nivelValue = $this->getNivel();
+
+        return view( 'cms.register', compact( 'nivelValue' ) );
+    }
 
 	/**
 	 * @return array
@@ -92,12 +81,6 @@ class UsuarioLoginController extends Controller {
 		return $nivelValue;
 	}
 
-	public function showRegister() {
-		$nivelValue = $this->getNivel();
-
-		return view( 'cms.register', compact( 'nivelValue' ) );
-	}
-
 	public function showReset() {
 		$user = session( 'user_info' )->user;
 
@@ -110,14 +93,7 @@ class UsuarioLoginController extends Controller {
 			'contrasenha' => $request->input( 'contrasenha' )
 		];
 		$res = $this->repo->resetUser( $arr, session( 'user_info' ) );
-		if ( $res->StatusCode != null ) {
-			if ( $res->StatusCode == 200 ) {
-				return $this->repo->getViewInfo( 'cms.login', 'Password Reset', [] );
-			} else {
-				return $this->repo->getViewInfo( 'cms.login', 'Datos errones', [] );
-			}
-		} else {
-			return $this->repo->getViewInfo( 'cms.login', 'Datos errones', [] );
-		}
+		$infoView = $this->repo->setInfoView('cms.login', 'Contraseña cambiada', 'Datos erroneos');
+		return $this->repo->getView($res, $infoView ,[]);
 	}
 }

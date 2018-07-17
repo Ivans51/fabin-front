@@ -104,7 +104,5 @@
 <script src="{{ asset('js/dropdown.js') }}"></script>
 {{--<script src="{{ asset('js/effect-dropdown.js') }}"></script>--}}
 <script src="{{ asset('js/effect-modal.js') }}"></script>
-<script src="{{ asset('js/Chart.min.js') }}" charset="utf-8"></script>
- {!! $chart->script() !!}
 </body>
 </html>
