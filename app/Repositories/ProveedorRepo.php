@@ -18,7 +18,15 @@ class ProveedorRepo extends GuzzleHTTPRequest {
 		return $this->doRequestBodyHeader( $arr, '/api/proveedores/newproveedor', 'POST' );
 	}
 
+	public function edit( $arr, $id ) {
+		return $this->doRequestBodyHeader( $arr, '/api/proveedores/id/' . $id . '/edi', 'PUT' );
+	}
+
 	public function delete( $id ) {
 		return $this->doRequestHeader( '/api/proveedores/id/' . $id . '/delete', 'DELETE' );
+	}
+
+	public function showEdit( $id ) {
+		return $this->doRequestHeader( '/api/proveedores/id/' . $id . '/data', 'GET' );
 	}
 }

@@ -82,9 +82,9 @@ class ProveedorController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit( $id ) {
-
-
-		return view( 'cms.clientes.detalles.edit', compact( 'product' ) );
+		$res = $this->repo->showEdit($id);
+		$infoView = $this->repo->setInfoView('cms.proveedor.detalles.edit', '', 'Error');
+		return $this->repo->getView($res, $infoView, $res->Data);
 	}
 
 	/**
@@ -96,9 +96,17 @@ class ProveedorController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update( Request $request, $id ) {
-		$post = $id;
+		$arr      = [
+			'Nombre_proveedor' => $request->input( 'nombre' ),
+			'Empresa'          => $request->input( 'empresa' ),
+			'direccion'        => $request->input( 'direccion' ),
+			'email'            => $request->input( 'email' ),
+			'telefono'         => $request->input( 'telefono' ),
+		];
+		$res      = $this->repo->edit( $arr, $id );
+		$infoView = $this->repo->setInfoView( 'cms.proveedor.detalles.index', 'Proveedor Creado', 'Error' );
 
-		return redirect()->route( 'posts.edit', $post->id )->with( 'info', 'Entrada actualizada con éxito' );
+		return $this->repo->getView( $res, $infoView, $this->repo->indexProveedor()->Data );
 	}
 
 	/**
