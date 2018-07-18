@@ -8,7 +8,7 @@
 
 namespace App\Repositories;
 
-class AuditoriaRepo extends GuzzleHTTPRequest
+class ProductosRepo extends GuzzleHTTPRequest
 {
 
     public function indexAuditoria() {

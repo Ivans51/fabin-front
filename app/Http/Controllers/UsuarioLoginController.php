@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Charts\SampleChart;
-use App\Repositories\UsersRepo;
+use App\Repositories\UsuariosRepo;
 use Illuminate\Http\Request;
 
 class UsuarioLoginController extends Controller {
@@ -12,9 +12,9 @@ class UsuarioLoginController extends Controller {
 	/**
 	 * UsuarioLoginController constructor.
 	 *
-	 * @param UsersRepo $repo
+	 * @param UsuariosRepo $repo
 	 */
-	public function __construct( UsersRepo $repo ) {
+	public function __construct(UsuariosRepo $repo ) {
 		$this->repo = $repo;
 	}
 

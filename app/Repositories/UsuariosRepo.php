@@ -8,7 +8,7 @@
 
 namespace App\Repositories;
 
-class UsersRepo extends GuzzleHTTPRequest
+class UsuariosRepo extends GuzzleHTTPRequest
 {
 
     public function indexUser() {

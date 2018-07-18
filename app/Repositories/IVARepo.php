@@ -8,7 +8,7 @@
 
 namespace App\Repositories;
 
-class AuditoriaRepo extends GuzzleHTTPRequest
+class IVARepo extends GuzzleHTTPRequest
 {
 
     public function indexAuditoria() {
