@@ -12,7 +12,7 @@ class IVARepo extends GuzzleHTTPRequest
 {
 
     public function indexIVA() {
-        return $this->doRequestHeader( '/api/users/levelusers', 'GET' );
+        return $this->doRequestHeader( '/api/iva/getall', 'GET' );
     }
 
     public function create( $arr ) {

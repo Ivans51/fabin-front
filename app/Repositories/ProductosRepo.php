@@ -15,11 +15,31 @@ class ProductosRepo extends GuzzleHTTPRequest
         return $this->doRequestHeader( '/api/articulos/all', 'GET' );
     }
 
-    public function create( $arr ) {
+	public function indexCategoria() {
+		return $this->doRequestHeader( '/api/users/levelusers', 'GET' );
+	}
+
+	public function indexProveedor() {
+		return $this->doRequestHeader( '/api/proveedores/all', 'GET' );
+	}
+
+	public function indexMedidas() {
+		return $this->doRequestHeader( '/api/users/levelusers', 'GET' );
+	}
+
+	public function indexStock() {
+		return $this->doRequestHeader( '/api/proveedores/all', 'GET' );
+	}
+
+	public function indexIVA() {
+		return $this->doRequestHeader( '/api/iva/getall', 'GET' );
+	}
+
+	public function create( $arr ) {
         return $this->doRequestBodyHeader( $arr, '/api/proveedores/newproveedor', 'POST' );
     }
 
-    public function edit( $arr, $id ) {
+	public function edit( $arr, $id ) {
         return $this->doRequestBodyHeader( $arr, '/api/proveedores/id/' . $id . '/edi', 'PUT' );
     }
 

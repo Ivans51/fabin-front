@@ -40,14 +40,16 @@
                             <tbody>
                             @foreach($data as $dato)
                                 <tr>
-                                    <td>{{ $dato->id_usuario }}</td>
-                                    <td>{{ $dato->email }}</td>
+                                    <td>{{ $dato->Id_cliente }}</td>
+                                    <td>{{ $dato->Nombre }}</td>
+                                    <td>{{ $dato->telefon }}</td>
+                                    <td>{{ $dato->direccion_fiscal }}</td>
                                     <td width="10px">
-                                        <a href="{{ route('usuarios.edit', $dato->id_usuario) }}"
+                                        <a href="{{ route('clientes.edit', $dato->Id_cliente) }}"
                                            class="btn btn-sm btn-default">Editar</a>
                                     </td>
                                     <td width="10px">
-                                        {!! Form::open(['route' => ['usuario.destroy', $dato->id_usuario], 'method' => 'DELETE']) !!}
+                                        {!! Form::open(['route' => ['clientes.destroy', $dato->Id_cliente], 'method' => 'DELETE']) !!}
                                         <button class="btn btn-sm btn-danger">
                                             Eliminar
                                         </button>

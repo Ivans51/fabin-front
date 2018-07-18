@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProveedorRequest;
 use App\Repositories\ProveedorRepo;
 use Illuminate\Http\Request;
 
@@ -44,11 +45,11 @@ class ProveedorController extends Controller {
 	/**
 	 * Store a newly created resource in storage.
 	 *
-	 * @param  \Illuminate\Http\Request $request
+	 * @param ProveedorRequest $request
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function store( Request $request ) {
+	public function store( ProveedorRequest $request ) {
 		$arr      = [
 			'Nombre_proveedor' => $request->input( 'nombre' ),
 			'Empresa'          => $request->input( 'empresa' ),

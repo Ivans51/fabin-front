@@ -24,7 +24,7 @@
 </div>
 <div class="form-group">
 	{{ Form::label('id_impuesto', 'IVA') }}
-	{{ Form::text('id_impuesto', null, ['class' => 'form-control']) }}
+	{{ Form::select('id_impuesto', $iva, null, ['class' => 'form-control']) }}
 </div>
 <div class="form-group">
 	{{ Form::submit('Guardar', ['class' => 'btn btn-sm btn-primary']) }}

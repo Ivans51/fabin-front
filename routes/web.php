@@ -25,6 +25,7 @@ Route::get( 'login', 'UsuarioLoginController@showLogin' )->name('usuario_show_lo
 Route::post( 'user/login', 'UsuarioLoginController@login' )->name('usuario_login');
 Route::get( 'register', 'UsuarioLoginController@showRegister' )->name('usuario_show_register');
 Route::post( 'user/register', 'UsuarioLoginController@register' )->name('usuario_register');
+Route::get( 'user/close', 'UsuarioLoginController@close' )->name('usuario_close');
 Route::get( 'reset', 'UsuarioLoginController@showReset' )->name('usuario_show_reset');
 Route::put( 'user/reset', 'UsuarioLoginController@reset' )->name('usuario_reset');
 Route::get( 'usuarios/todos', 'UsuariosController@all' )->name('usuarios_todos');

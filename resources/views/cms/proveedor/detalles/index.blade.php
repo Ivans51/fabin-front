@@ -27,6 +27,7 @@
             <div class="col-md-12 col-md-offset-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
+                        @include('cms.proveedor.detalles.partials.errors')
                         <h3>Lista de Productos</h3>
                         <table class="table table-striped table-hover">
                             <thead>

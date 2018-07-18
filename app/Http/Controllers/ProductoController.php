@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\ProductosRepo;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 
 class ProductoController extends Controller {
@@ -16,7 +14,7 @@ class ProductoController extends Controller {
 	 *
 	 * @param $repo
 	 */
-	public function __construct(ProductosRepo $repo ) {
+	public function __construct( ProductosRepo $repo ) {
 		$this->repo = $repo;
 	}
 
@@ -27,9 +25,23 @@ class ProductoController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		$res = $this->repo->indexProducto();
-		$infoView = $this->repo->setInfoView('cms.catalogo.producto.index', '', 'Error');
-		return $this->repo->getView($res, $infoView , $res->Data);
+		$res        = $this->repo->indexProducto();
+		$iva        = $this->repo->indexIVA();
+		$categories = $this->repo->indexCategoria();
+		$medidas    = $this->repo->indexMedidas();
+		$proveedor  = $this->repo->indexProveedor();
+		$stock      = $this->repo->indexStock();
+		$data       = [
+			'data'       => $res->Data,
+			'iva'        => $iva->Data,
+			'categories' => $categories->Data,
+			'unidades'   => $medidas->Data,
+			'proveedor'  => $proveedor->Data,
+			'stock'      => $stock->Data,
+		];
+		$infoView   = $this->repo->setInfoView( 'cms.catalogo.producto.index', '', 'Error' );
+
+		return $this->repo->getView( $res, $infoView, $data, true );
 	}
 
 	/**

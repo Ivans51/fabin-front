@@ -13,6 +13,7 @@
     <!-- Styles -->
     {{--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('formhelpers/dist/css/bootstrap-formhelpers.min.css') }}" media="screen">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
           integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
@@ -75,7 +76,7 @@
                 <a href="{{route('respaldo.index')}}">Respaldo</a>
                 <a href="{{route('manual.index')}}">Manual</a>
             </div>
-            <a href="{{ url('/') }}"><i class="fas fa-sign-out-alt pr-2"></i>Cerrar Sessión</a>
+            <a href="{{ route('usuario_close') }}"><i class="fas fa-sign-out-alt pr-2"></i>Cerrar Sessión</a>
         </div>
     @endif
     <div class="custom-container d-flex justify-content-between">
@@ -88,6 +89,9 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="alert alert-info">
+                                <button type="button" class="close" data-dismiss="alert">
+                                    <span>&times;</span>
+                                </button>
                                 {{ session('info') }}
                             </div>
                         </div>
@@ -101,6 +105,7 @@
 {{--<script src="{{ asset('js/app.js') }}"></script>--}}
 <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('formhelpers/dist/js/bootstrap-formhelpers.min.js') }}"></script>
 <script src="{{ asset('js/dropdown.js') }}"></script>
 {{--<script src="{{ asset('js/effect-dropdown.js') }}"></script>--}}
 <script src="{{ asset('js/effect-modal.js') }}"></script>

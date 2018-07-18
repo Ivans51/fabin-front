@@ -88,16 +88,30 @@ class GuzzleHTTPRequest {
 		}
 	}
 
-	public function getView( $res, $infoView, $data ) {
+	public function getView( $res, $infoView, $data, $multiple = false ) {
 		if ( is_string( $res ) ) {
 			return abort( 500, $res );
 		} else {
 			if ( $res->StatusCode == 200 ) {
-				return $this->getViewInfo( $infoView->view, $infoView->infoSuccesful, $data );
+				if ( $multiple ) {
+					return $this->getViewInfoMultiple( $infoView->view, $infoView->infoSuccesful, $data );
+				} else {
+					return $this->getViewInfo( $infoView->view, $infoView->infoSuccesful, $data );
+				}
 			} else {
-				return $this->getViewInfo( $infoView->view, $infoView->infoError, $data );
+				if ( $multiple ) {
+					return $this->getViewInfoMultiple( $infoView->view, $infoView->infoSuccesful, $data );
+				} else {
+					return $this->getViewInfo( $infoView->view, $infoView->infoSuccesful, $data );
+				}
 			}
 		}
+	}
+
+	public function getViewInfoMultiple( $view, $info, $data ) {
+		session()->flash( 'info', $info );
+
+		return view( $view )->with( $data );
 	}
 
 	public function getViewInfo( $view, $info, $data ) {

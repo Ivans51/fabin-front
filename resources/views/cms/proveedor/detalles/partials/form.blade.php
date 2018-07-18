@@ -15,8 +15,8 @@
     {{ Form::text('email', null, ['class' => 'form-control', 'id' => 'email']) }}
 </div>
 <div class="form-group">
-    {{ Form::label('telefono', 'Teléfono') }}
-    {{ Form::text('telefono', null, ['class' => 'form-control', 'id' => 'telefono']) }}
+    <label for="telefono"></label>
+    <input type="text" class="input-medium bfh-phone form-control" data-format="+58 (ddd) ddd-dddd" name="telefono" id="telefono">
 </div>
 <div class="form-group">
     {{ Form::submit('Guardar', ['class' => 'btn btn-sm btn-primary']) }}

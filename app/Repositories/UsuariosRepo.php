@@ -38,4 +38,8 @@ class UsuariosRepo extends GuzzleHTTPRequest
 	public function delete( $id ) {
 		return $this->doRequestHeader( 'api/users/delete/user/id/' . $id, 'DELETE' );
 	}
+
+	public function edit( $arr, $id ) {
+		return $this->doRequestBodyHeader( $arr, '/api/users/update/user/id/' . $id, 'PUT' );
+	}
 }

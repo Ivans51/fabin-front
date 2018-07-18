@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Repositories\UsuariosRepo;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 
 class UsuariosController extends Controller {
@@ -27,12 +26,13 @@ class UsuariosController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-        $client = new Client(['base_uri' => 'http://165.227.96.113:5010']);
-        /*$response = $client->request( 'GET', '/api/users/levelusers' );
-        $nivel    = $response->getStatusCode() == 200 ? json_decode( $response->getBody()->getContents() ) : '';*/
-        $response = 'Ivans';
-        $nivel = 'Pedro';
-        return view('cms.register', compact('nivel', 'response'));
+		$client = new Client( [ 'base_uri' => 'http://165.227.96.113:5010' ] );
+		/*$response = $client->request( 'GET', '/api/users/levelusers' );
+		$nivel    = $response->getStatusCode() == 200 ? json_decode( $response->getBody()->getContents() ) : '';*/
+		$response = 'Ivans';
+		$nivel    = 'Pedro';
+
+		return view( 'cms.register', compact( 'nivel', 'response' ) );
 	}
 
 	/**
@@ -50,9 +50,10 @@ class UsuariosController extends Controller {
 	}
 
 	public function all() {
-		$res = $this->repo->allUsers();
-		$infoView = $this->repo->setInfoView('cms.usuarios.detalles.todos', '', 'Error');
-		return $this->repo->getView($res, $infoView , $res->Data);
+		$res      = $this->repo->allUsers();
+		$infoView = $this->repo->setInfoView( 'cms.usuarios.detalles.todos', '', 'Error' );
+
+		return $this->repo->getView( $res, $infoView, $res->Data );
 	}
 
 	/**
@@ -77,6 +78,7 @@ class UsuariosController extends Controller {
 	 */
 	public function show( $id ) {
 		$product = '';
+
 		return view( 'cms.usuarios.detalles.show', compact( 'product' ) );
 	}
 
@@ -89,6 +91,7 @@ class UsuariosController extends Controller {
 	 */
 	public function edit( $id ) {
 		$product = '';
+
 		return view( 'cms.usuarios.detalles.edit', compact( 'product' ) );
 	}
 
@@ -111,7 +114,7 @@ class UsuariosController extends Controller {
 		$res      = $this->repo->edit( $arr, $id );
 		$infoView = $this->repo->setInfoView( 'cms.proveedor.detalles.index', 'Proveedor Creado', 'Error' );
 
-		return $this->repo->getView( $res, $infoView, $this->repo->indexProveedor()->Data );
+		return $this->repo->getView( $res, $infoView, $this->repo->indexUser()->Data );
 	}
 
 	/**

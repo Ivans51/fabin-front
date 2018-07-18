@@ -11,7 +11,7 @@ namespace App\Repositories;
 class ClientesRepo extends GuzzleHTTPRequest {
 
 	public function indexClientes() {
-		return $this->doRequestHeader( 'api/users/register/client', 'GET' );
+		return $this->doRequestHeader( '/api/users/clients', 'GET' );
 	}
 
 	public function create( $arr ) {
@@ -23,7 +23,7 @@ class ClientesRepo extends GuzzleHTTPRequest {
 	}
 
 	public function delete( $id ) {
-		return $this->doRequestHeader( '/api/proveedores/id/' . $id . '/delete', 'DELETE' );
+		return $this->doRequestHeader( '/api/users/delete/client/id/' . $id , 'DELETE' );
 	}
 
 	public function showEdit( $id ) {
