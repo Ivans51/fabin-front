@@ -18,7 +18,6 @@ Route::get( '/', function () {
 Route::get( '/index', 'IndexController@show' )->name( 'index' );
 
 Route::get( 'usuarios/history', 'UsuariosController@history' )->name('usuarios_history');
-Route::get( 'usuarios/todos', 'UsuariosController@all' )->name('usuarios_todos');
 
 Route::get( 'pedidos/status', 'PedidosController@status' )->name('pedidos_status');
 
@@ -28,6 +27,7 @@ Route::get( 'register', 'UsuarioLoginController@showRegister' )->name('usuario_s
 Route::post( 'user/register', 'UsuarioLoginController@register' )->name('usuario_register');
 Route::get( 'reset', 'UsuarioLoginController@showReset' )->name('usuario_show_reset');
 Route::put( 'user/reset', 'UsuarioLoginController@reset' )->name('usuario_reset');
+Route::get( 'usuarios/todos', 'UsuariosController@all' )->name('usuarios_todos');
 
 Route::resource( 'producto', 'ProductoController' );
 Route::resource( 'categoria', 'CategoriaController' );

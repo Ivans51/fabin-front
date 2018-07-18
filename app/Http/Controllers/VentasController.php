@@ -2,20 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\VentasRepo;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 
 class VentasController extends Controller {
+
+	protected $repo;
+
+	/**
+	 * VentasController constructor.
+	 *
+	 * @param $repo
+	 */
+	public function __construct( VentasRepo $repo ) {
+		$this->repo = $repo;
+	}
+
+
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
+		$res      = $this->repo->indexVentas();
+		$infoView = $this->repo->setInfoView( 'cms.ventas.detalles.index', '', 'Error' );
 
-
-		return view( 'cms.ventas.detalles.index', compact( 'products' ) );
+		return $this->repo->getView( $res, $infoView, $res->Data );
 	}
 
 	/**
@@ -37,9 +52,17 @@ class VentasController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store( Request $request ) {
-		$post = '';
+		$arr      = [
+			'Nombre_proveedor' => $request->input( 'nombre' ),
+			'Empresa'          => $request->input( 'empresa' ),
+			'direccion'        => $request->input( 'direccion' ),
+			'email'            => $request->input( 'email' ),
+			'telefono'         => $request->input( 'telefono' ),
+		];
+		$res      = $this->repo->create( $arr );
+		$infoView = $this->repo->setInfoView( 'cms.ventas.detalles.index', 'Venta Creado', 'Error' );
 
-		return redirect()->route( 'posts.edit', $post->id )->with( 'info', 'Entrada creada con éxito' );
+		return $this->repo->getView( $res, $infoView, $this->repo->indexVentas()->Data );
 	}
 
 	/**
@@ -62,8 +85,10 @@ class VentasController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit( $id ) {
+		$res      = $this->repo->showEdit( $id );
+		$infoView = $this->repo->setInfoView( 'cms.ventas.detalles.index', '', 'Error' );
 
-		return view( 'cms.ventas.detalles.edit', compact( 'product' ) );
+		return $this->repo->getView( $res, $infoView, $res->Data );
 	}
 
 	/**
@@ -75,9 +100,17 @@ class VentasController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update( Request $request, $id ) {
-		$post = $id;
+		$arr      = [
+			'Nombre_proveedor' => $request->input( 'nombre' ),
+			'Empresa'          => $request->input( 'empresa' ),
+			'direccion'        => $request->input( 'direccion' ),
+			'email'            => $request->input( 'email' ),
+			'telefono'         => $request->input( 'telefono' ),
+		];
+		$res      = $this->repo->edit( $arr, $id );
+		$infoView = $this->repo->setInfoView( 'cms.ventas.detalles.index', 'Ventas editado', 'Error' );
 
-		return redirect()->route( 'posts.edit', $post->id )->with( 'info', 'Entrada actualizada con éxito' );
+		return $this->repo->getView( $res, $infoView, $this->repo->indexVentas()->Data );
 	}
 
 	/**
@@ -88,6 +121,9 @@ class VentasController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function destroy( $id ) {
-		return back()->with( 'info', 'Eliminado correctamente' );
+		$res      = $this->repo->delete( $id );
+		$infoView = $this->repo->setInfoView( 'cms.ventas.detalles.index', 'Venta Eliminado', 'Error' );
+
+		return $this->repo->getView( $res, $infoView, $this->repo->indexVentas()->Data );
 	}
 }

@@ -34,7 +34,23 @@
                             </tr>
                             </thead>
                             <tbody>
-
+                            @foreach($data as $dato)
+                                <tr>
+                                    <td>{{ $dato->id_usuario }}</td>
+                                    <td>{{ $dato->email }}</td>
+                                    <td width="10px">
+                                        <a href="{{ route('usuarios.edit', $dato->id_usuario) }}"
+                                           class="btn btn-sm btn-default">Editar</a>
+                                    </td>
+                                    <td width="10px">
+                                        {!! Form::open(['route' => ['usuario.destroy', $dato->id_usuario], 'method' => 'DELETE']) !!}
+                                        <button class="btn btn-sm btn-danger">
+                                            Eliminar
+                                        </button>
+                                        {!! Form::close() !!}
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
 

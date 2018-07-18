@@ -11,8 +11,8 @@ namespace App\Repositories;
 class MetodosRepo extends GuzzleHTTPRequest
 {
 
-    public function indexAuditoria() {
-        return $this->doRequest( '/api/users/levelusers', 'GET' );
+    public function indexMetodos() {
+        return $this->doRequestHeader( '/api/users/levelusers', 'GET' );
     }
 
     public function create( $arr ) {

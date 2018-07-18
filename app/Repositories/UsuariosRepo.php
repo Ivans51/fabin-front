@@ -30,4 +30,12 @@ class UsuariosRepo extends GuzzleHTTPRequest
     public function resetUser($arr, $id) {
         return $this->doRequestBody( $arr, '/api/users/update/user/id/' . $id, 'PUT' );
     }
+
+    public function allUsers() {
+	    return $this->doRequestHeader( '/api/users/all', 'GET' );
+    }
+
+	public function delete( $id ) {
+		return $this->doRequestHeader( 'api/users/delete/user/id/' . $id, 'DELETE' );
+	}
 }

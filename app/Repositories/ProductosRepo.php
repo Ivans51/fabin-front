@@ -11,8 +11,8 @@ namespace App\Repositories;
 class ProductosRepo extends GuzzleHTTPRequest
 {
 
-    public function indexAuditoria() {
-        return $this->doRequest( '/api/users/levelusers', 'GET' );
+    public function indexProducto() {
+        return $this->doRequestHeader( '/api/articulos/all', 'GET' );
     }
 
     public function create( $arr ) {

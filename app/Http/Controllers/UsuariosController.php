@@ -2,11 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\UsuariosRepo;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 
 class UsuariosController extends Controller {
+
+	protected $repo;
+
+	/**
+	 * UsuariosController constructor.
+	 *
+	 * @param $repo
+	 */
+	public function __construct( UsuariosRepo $repo ) {
+		$this->repo = $repo;
+	}
+
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -33,15 +47,12 @@ class UsuariosController extends Controller {
 	}
 
 	public function history() {
-
-
-		return $status == 200 ? view( 'cms.usuarios.detalles.history', compact( 'products' ) ) : abort( 404 );
 	}
 
 	public function all() {
-
-
-		return $status == 200 ? view( 'cms.usuarios.detalles.todos', compact( 'products' ) ) : abort( 404 );
+		$res = $this->repo->allUsers();
+		$infoView = $this->repo->setInfoView('cms.usuarios.detalles.todos', '', 'Error');
+		return $this->repo->getView($res, $infoView , $res->Data);
 	}
 
 	/**
@@ -90,9 +101,17 @@ class UsuariosController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update( Request $request, $id ) {
-		$post = $id;
+		$arr      = [
+			'Nombre_proveedor' => $request->input( 'nombre' ),
+			'Empresa'          => $request->input( 'empresa' ),
+			'direccion'        => $request->input( 'direccion' ),
+			'email'            => $request->input( 'email' ),
+			'telefono'         => $request->input( 'telefono' ),
+		];
+		$res      = $this->repo->edit( $arr, $id );
+		$infoView = $this->repo->setInfoView( 'cms.proveedor.detalles.index', 'Proveedor Creado', 'Error' );
 
-		return redirect()->route( 'posts.edit', $post->id )->with( 'info', 'Entrada actualizada con éxito' );
+		return $this->repo->getView( $res, $infoView, $this->repo->indexProveedor()->Data );
 	}
 
 	/**
@@ -103,6 +122,9 @@ class UsuariosController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function destroy( $id ) {
-		return back()->with( 'info', 'Eliminado correctamente' );
+		$res      = $this->repo->delete( $id );
+		$infoView = $this->repo->setInfoView( 'cms.usuarios.detalles.todos', 'Proveedor Eliminado', 'Error' );
+
+		return $this->repo->getView( $res, $infoView, $this->repo->indexUser()->Data );
 	}
 }

@@ -24,9 +24,10 @@ class ProveedorController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		$data = $this->repo->indexProveedor()->Data;
+		$res      = $this->repo->indexProveedor();
+		$infoView = $this->repo->setInfoView( 'cms.proveedor.detalles.index', '', 'Error' );
 
-		return view( 'cms.proveedor.detalles.index', compact( 'data' ) );
+		return $this->repo->getView( $res, $infoView, $res->Data );
 	}
 
 	/**
@@ -82,9 +83,10 @@ class ProveedorController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit( $id ) {
-		$res = $this->repo->showEdit($id);
-		$infoView = $this->repo->setInfoView('cms.proveedor.detalles.edit', '', 'Error');
-		return $this->repo->getView($res, $infoView, $res->Data);
+		$res      = $this->repo->showEdit( $id );
+		$infoView = $this->repo->setInfoView( 'cms.proveedor.detalles.edit', '', 'Error' );
+
+		return $this->repo->getView( $res, $infoView, $res->Data );
 	}
 
 	/**

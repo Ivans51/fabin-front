@@ -1,6 +1,6 @@
 <div class="form-group">
-    {{ Form::label('razon_social', 'Razon social') }}
-    {{ Form::text('razon_social', null, ['class' => 'form-control', 'id' => 'razon_social']) }}
+    {{ Form::label('email', 'Correo') }}
+    {{ Form::text('email', null, ['class' => 'form-control', 'id' => 'email']) }}
 </div>
 <div class="form-group">
     {{ Form::label('nombre', 'Nombre') }}

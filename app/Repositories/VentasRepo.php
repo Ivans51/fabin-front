@@ -11,8 +11,8 @@ namespace App\Repositories;
 class VentasRepo extends GuzzleHTTPRequest
 {
 
-    public function indexAuditoria() {
-        return $this->doRequest( '/api/users/levelusers', 'GET' );
+    public function indexVentas() {
+        return $this->doRequestHeader( '/api/users/levelusers', 'GET' );
     }
 
     public function create( $arr ) {

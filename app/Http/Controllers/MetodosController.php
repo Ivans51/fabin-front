@@ -2,20 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
+use App\Repositories\MetodosRepo;
 use Illuminate\Http\Request;
 
 class MetodosController extends Controller {
+	protected $repo;
+
+	/**
+	 * MetodosController constructor.
+	 *
+	 * @param $repo
+	 */
+	public function __construct( MetodosRepo $repo ) {
+		$this->repo = $repo;
+	}
+
+
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
+		$res      = $this->repo->indexMetodos();
+		$infoView = $this->repo->setInfoView( 'cms.pago.metodos.index', '', 'Error' );
 
-
-		return view( 'cms.pago.metodos.index', compact( 'products' ) );
+		return $this->repo->getView( $res, $infoView, $res->Data );
 	}
 
 	/**
@@ -37,9 +49,17 @@ class MetodosController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store( Request $request ) {
-		$post = '';
+		$arr      = [
+			'Nombre_proveedor' => $request->input( 'nombre' ),
+			'Empresa'          => $request->input( 'empresa' ),
+			'direccion'        => $request->input( 'direccion' ),
+			'email'            => $request->input( 'email' ),
+			'telefono'         => $request->input( 'telefono' ),
+		];
+		$res      = $this->repo->create( $arr );
+		$infoView = $this->repo->setInfoView( 'cms.pago.metodos.index', 'Metodo Creado', 'Error' );
 
-		return redirect()->route( 'posts.edit', $post->id )->with( 'info', 'Entrada creada con éxito' );
+		return $this->repo->getView( $res, $infoView, $this->repo->indexMetodos()->Data );
 	}
 
 	/**
@@ -62,8 +82,10 @@ class MetodosController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit( $id ) {
+		$res      = $this->repo->showEdit( $id );
+		$infoView = $this->repo->setInfoView( 'cms.pago.metodos.index', '', 'Error' );
 
-		return view( 'cms.pago.metodos.edit', compact( 'product' ) );
+		return $this->repo->getView( $res, $infoView, $res->Data );
 	}
 
 	/**
@@ -75,9 +97,17 @@ class MetodosController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update( Request $request, $id ) {
-		$post = $id;
+		$arr      = [
+			'Nombre_proveedor' => $request->input( 'nombre' ),
+			'Empresa'          => $request->input( 'empresa' ),
+			'direccion'        => $request->input( 'direccion' ),
+			'email'            => $request->input( 'email' ),
+			'telefono'         => $request->input( 'telefono' ),
+		];
+		$res      = $this->repo->edit( $arr, $id );
+		$infoView = $this->repo->setInfoView( 'cms.pago.metodos.index', 'Metodo editado', 'Error' );
 
-		return redirect()->route( 'posts.edit', $post->id )->with( 'info', 'Entrada actualizada con éxito' );
+		return $this->repo->getView( $res, $infoView, $this->repo->indexMetodos()->Data );
 	}
 
 	/**
@@ -88,6 +118,9 @@ class MetodosController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function destroy( $id ) {
-		return back()->with( 'info', 'Eliminado correctamente' );
+		$res      = $this->repo->delete( $id );
+		$infoView = $this->repo->setInfoView( 'cms.pago.metodos.index', 'Metodo Eliminado', 'Error' );
+
+		return $this->repo->getView( $res, $infoView, $this->repo->indexMetodos()->Data );
 	}
 }

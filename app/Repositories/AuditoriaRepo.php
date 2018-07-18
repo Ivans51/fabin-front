@@ -12,7 +12,7 @@ class AuditoriaRepo extends GuzzleHTTPRequest
 {
 
     public function indexAuditoria() {
-        return $this->doRequest( '/api/users/levelusers', 'GET' );
+        return $this->doRequestHeader( '/api/auditorias/all', 'GET' );
     }
 
     public function create( $arr ) {

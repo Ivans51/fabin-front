@@ -16,9 +16,14 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @foreach($data as $dato)
                                 <tr>
-                                    <td></td>
+                                    <td>{{ $dato->id_auditoria }}</td>
+                                    <td>{{ $dato->nombre }}</td>
+                                    <td>{{ $dato->descrjipcion }}</td>
+                                    <td>{{ $dato->fecha_acceso }}</td>
                                 </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>

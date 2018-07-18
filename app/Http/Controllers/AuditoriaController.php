@@ -26,9 +26,9 @@ class AuditoriaController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		$auditoria = $this->repo->indexAuditoria();
-
-		return view( 'cms.operaciones.auditoria.index', compact( 'auditoria' ) );
+		$res = $this->repo->indexAuditoria();
+		$infoView = $this->repo->setInfoView('cms.operaciones.auditoria.index', '', 'Error');
+		return $this->repo->getView($res, $infoView , $res->Data);
 	}
 
     public function displayReport(Request $request) {

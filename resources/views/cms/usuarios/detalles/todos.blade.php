@@ -37,20 +37,16 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($products as $product)
+                            @foreach($data as $dato)
                                 <tr>
-                                    <td>{{ $product->id }}</td>
-                                    <td>{{ $product->title }}</td>
+                                    <td>{{ $dato->id_usuario }}</td>
+                                    <td>{{ $dato->email }}</td>
                                     <td width="10px">
-                                        <a href="{{ route('usuarios.show', $product->id) }}"
-                                           class="btn btn-sm btn-default">Ver</a>
-                                    </td>
-                                    <td width="10px">
-                                        <a href="{{ route('usuarios.edit', $product->id) }}"
+                                        <a href="{{ route('usuarios.edit', $dato->id_usuario) }}"
                                            class="btn btn-sm btn-default">Editar</a>
                                     </td>
                                     <td width="10px">
-                                        {!! Form::open(['route' => ['usuarios.destroy', $product->id], 'method' => 'DELETE']) !!}
+                                        {!! Form::open(['route' => ['usuario.destroy', $dato->id_usuario], 'method' => 'DELETE']) !!}
                                         <button class="btn btn-sm btn-danger">
                                             Eliminar
                                         </button>

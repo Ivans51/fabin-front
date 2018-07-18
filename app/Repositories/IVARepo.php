@@ -11,8 +11,8 @@ namespace App\Repositories;
 class IVARepo extends GuzzleHTTPRequest
 {
 
-    public function indexAuditoria() {
-        return $this->doRequest( '/api/users/levelusers', 'GET' );
+    public function indexIVA() {
+        return $this->doRequestHeader( '/api/users/levelusers', 'GET' );
     }
 
     public function create( $arr ) {

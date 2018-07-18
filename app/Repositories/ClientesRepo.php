@@ -8,26 +8,25 @@
 
 namespace App\Repositories;
 
-class ClientesRepo extends GuzzleHTTPRequest
-{
+class ClientesRepo extends GuzzleHTTPRequest {
 
-    public function indexAuditoria() {
-        return $this->doRequest( '/api/users/levelusers', 'GET' );
-    }
+	public function indexClientes() {
+		return $this->doRequestHeader( 'api/users/register/client', 'GET' );
+	}
 
-    public function create( $arr ) {
-        return $this->doRequestBodyHeader( $arr, '/api/proveedores/newproveedor', 'POST' );
-    }
+	public function create( $arr ) {
+		return $this->doRequestBodyHeader( $arr, '/api/proveedores/newproveedor', 'POST' );
+	}
 
-    public function edit( $arr, $id ) {
-        return $this->doRequestBodyHeader( $arr, '/api/proveedores/id/' . $id . '/edi', 'PUT' );
-    }
+	public function edit( $arr, $id ) {
+		return $this->doRequestBodyHeader( $arr, '/api/proveedores/id/' . $id . '/edi', 'PUT' );
+	}
 
-    public function delete( $id ) {
-        return $this->doRequestHeader( '/api/proveedores/id/' . $id . '/delete', 'DELETE' );
-    }
+	public function delete( $id ) {
+		return $this->doRequestHeader( '/api/proveedores/id/' . $id . '/delete', 'DELETE' );
+	}
 
-    public function showEdit( $id ) {
-        return $this->doRequestHeader( '/api/proveedores/id/' . $id . '/data', 'GET' );
-    }
+	public function showEdit( $id ) {
+		return $this->doRequestHeader( '/api/proveedores/id/' . $id . '/data', 'GET' );
+	}
 }

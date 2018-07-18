@@ -4,7 +4,7 @@
 
     <div class="panel-heading modal-effect mb-3">
         <!-- Trigger/Open The Modal -->
-        <button id="myBtn" class="accordion">Añadir producto</button>
+        <button id="myBtn" class="accordion">Añadir cliente</button>
         <!-- The Modal -->
         <div id="myModal" class="modal">
             <!-- Modal content -->
@@ -37,7 +37,25 @@
                             </tr>
                             </thead>
                             <tbody>
-
+                            <tbody>
+                            @foreach($data as $dato)
+                                <tr>
+                                    <td>{{ $dato->id_usuario }}</td>
+                                    <td>{{ $dato->email }}</td>
+                                    <td width="10px">
+                                        <a href="{{ route('usuarios.edit', $dato->id_usuario) }}"
+                                           class="btn btn-sm btn-default">Editar</a>
+                                    </td>
+                                    <td width="10px">
+                                        {!! Form::open(['route' => ['usuario.destroy', $dato->id_usuario], 'method' => 'DELETE']) !!}
+                                        <button class="btn btn-sm btn-danger">
+                                            Eliminar
+                                        </button>
+                                        {!! Form::close() !!}
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
                         </table>
                     </div>
                 </div>

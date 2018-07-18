@@ -2,20 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\ProductosRepo;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 
 class ProductoController extends Controller {
+
+	protected $repo;
+
+	/**
+	 * ProductoController constructor.
+	 *
+	 * @param $repo
+	 */
+	public function __construct(ProductosRepo $repo ) {
+		$this->repo = $repo;
+	}
+
+
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-
-
-		return view( 'cms.catalogo.producto.index', compact( 'products' ) );
+		$res = $this->repo->indexProducto();
+		$infoView = $this->repo->setInfoView('cms.catalogo.producto.index', '', 'Error');
+		return $this->repo->getView($res, $infoView , $res->Data);
 	}
 
 	/**
