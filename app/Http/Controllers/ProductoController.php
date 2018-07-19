@@ -30,18 +30,78 @@ class ProductoController extends Controller {
 		$categories = $this->repo->indexCategoria();
 		$medidas    = $this->repo->indexMedidas();
 		$proveedor  = $this->repo->indexProveedor();
-		$stock      = $this->repo->indexStock();
-		$data       = [
-			'data'       => $res->Data,
-			'iva'        => $iva->Data,
-			'categories' => $categories->Data,
-			'unidades'   => $medidas->Data,
-			'proveedor'  => $proveedor->Data,
-			'stock'      => $stock->Data,
+		/*$stock      = $this->repo->indexStock();*/
+		$data     = [
+			'data'        => $res->Data,
+			'iva'         => $this->getIva( $iva ),
+			'categories'  => $this->getCategories( $categories ),
+			'unidades'    => $this->getUnidades( $medidas ),
+			'proveedores' => $this->getProveedores( $proveedor ),
+			/*'stock'      => $stock->Data,*/
 		];
-		$infoView   = $this->repo->setInfoView( 'cms.catalogo.producto.index', '', 'Error' );
+		$infoView = $this->repo->setInfoView( 'cms.catalogo.producto.index', '', 'Error' );
 
 		return $this->repo->getView( $res, $infoView, $data, true );
+	}
+
+	/**
+	 * @param $res
+	 *
+	 * @return array
+	 */
+	public function getIva( $res ): array {
+		$nivel      = $res->Data;
+		$nivelValue = array( 'Seleccionar' );
+		for ( $i = 0; $i < count( $nivel ); $i ++ ) {
+			$nivelValue[] = $nivel[ $i ]->nombre;
+		}
+
+		return $nivelValue;
+	}
+
+	/**
+	 * @param $res
+	 *
+	 * @return array
+	 */
+	public function getCategories( $res ): array {
+		$nivel      = $res->Data;
+		$nivelValue = array( 'Seleccionar' );
+		for ( $i = 0; $i < count( $nivel ); $i ++ ) {
+			$nivelValue[] = $nivel[ $i ]->nombre;
+		}
+
+		return $nivelValue;
+	}
+
+	/**
+	 * @param $res
+	 *
+	 * @return array
+	 */
+	public function getUnidades( $res ): array {
+		$nivel      = $res->Data;
+		$nivelValue = array( 'Seleccionar' );
+		for ( $i = 0; $i < count( $nivel ); $i ++ ) {
+			$nivelValue[] = $nivel[ $i ]->descripcion_larga;
+		}
+
+		return $nivelValue;
+	}
+
+	/**
+	 * @param $res
+	 *
+	 * @return array
+	 */
+	public function getProveedores( $res ): array {
+		$nivel      = $res->Data;
+		$nivelValue = array( 'Seleccionar' );
+		for ( $i = 0; $i < count( $nivel ); $i ++ ) {
+			$nivelValue[] = $nivel[ $i ]->Nombre_proveedor;
+		}
+
+		return $nivelValue;
 	}
 
 	/**

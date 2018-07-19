@@ -4,13 +4,11 @@
     @push('styles')
         <link href="{{ asset('css/login.css') }}" rel="stylesheet">
     @endpush
-    <div class="container login-container">
-        <div class="panel panel-default">
-            <div class="panel-heading mt-3 mb-3 text-center d-flex">
-                <img src="{{URL::asset('img/logo.png')}}" alt="profile Pic" height="80" width="80">
-                <h1 class="ml-3">Inicio de Sessión</h1>
-            </div>
-            <div class="panel-body">
+    <div class="container">
+        <div class="card">
+            {{--<img src="{{URL::asset('img/logo.png')}}" alt="profile Pic" height="80" width="80">--}}
+            <h1 class="ml-3 text-center mt-3">Inicio de Sesion</h1>
+            <div class="container">
                 <form class="form-horizontal" method="POST" action="{{route('usuario_login') }}">
                     {{ csrf_field() }}
                     <div class="form-group">
@@ -42,12 +40,10 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <div class="col-md-8 col-md-offset-4">
-                            <button type="submit" class="btn btn-dark">
-                                Login
-                            </button>
-                        </div>
+                    <div class="form-group text-right">
+                        <button type="submit" class="btn btn-dark">
+                            Login
+                        </button>
                     </div>
                 </form>
             </div>

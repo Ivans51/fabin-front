@@ -4,7 +4,7 @@
 
     <div class="panel-heading modal-effect mb-3">
         <!-- Trigger/Open The Modal -->
-        <button id="myBtn" class="accordion">Añadir producto</button>
+        <button id="myBtn" class="accordion">Añadir métodos</button>
         <!-- The Modal -->
         <div id="myModal" class="modal">
             <!-- Modal content -->
@@ -17,7 +17,7 @@
                     @include('cms.pago.metodos.partials.form')
                 </div>
                 <div class="modal-footer">
-                    <h3>Modal Footer</h3>
+                    <h3></h3>
                 </div>
             </div>
         </div>
@@ -36,11 +36,25 @@
                                 <th colspan="3">&nbsp;</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr>
-                                <td></td>
-                            </tr>
-                            </tbody>
+                            {{--<tbody>
+                            @foreach($data as $dato)
+                                <tr>
+                                    <td>{{ $dato->id_articulo }}</td>
+                                    <td>{{ $dato->nombre }}</td>
+                                    <td width="10px">
+                                        <a href="{{ route('metodos.edit', $dato->id_articulo) }}"
+                                           class="btn btn-sm btn-default">Editar</a>
+                                    </td>
+                                    <td width="10px">
+                                        {!! Form::open(['route' => ['metodos.destroy', $dato->id_articulo], 'method' => 'DELETE']) !!}
+                                        <button class="btn btn-sm btn-danger">
+                                            Eliminar
+                                        </button>
+                                        {!! Form::close() !!}
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>--}}
                         </table>
 
                         {{--{!!  $products->render() !!}--}}

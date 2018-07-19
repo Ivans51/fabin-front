@@ -12,7 +12,7 @@ class MedidasRepo extends GuzzleHTTPRequest
 {
 
     public function indexMedidas() {
-        return $this->doRequestHeader( '/api/users/levelusers', 'GET' );
+        return $this->doRequestHeader( '/api/unidadmedida/getall', 'GET' );
     }
 
     public function create( $arr ) {
@@ -28,6 +28,6 @@ class MedidasRepo extends GuzzleHTTPRequest
     }
 
     public function showEdit( $id ) {
-        return $this->doRequestHeader( '/api/proveedores/id/' . $id . '/data', 'GET' );
+        return $this->doRequestHeader( '/api/unidadmedida/get/id/' . $id , 'GET' );
     }
 }

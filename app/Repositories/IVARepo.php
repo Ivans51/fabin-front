@@ -16,18 +16,18 @@ class IVARepo extends GuzzleHTTPRequest
     }
 
     public function create( $arr ) {
-        return $this->doRequestBodyHeader( $arr, '/api/proveedores/newproveedor', 'POST' );
+        return $this->doRequestBodyHeader( $arr, '/api/iva/register', 'POST' );
     }
 
     public function edit( $arr, $id ) {
-        return $this->doRequestBodyHeader( $arr, '/api/proveedores/id/' . $id . '/edi', 'PUT' );
+        return $this->doRequestBodyHeader( $arr, '/api/iva/edit/id/' . $id , 'PUT' );
     }
 
     public function delete( $id ) {
-        return $this->doRequestHeader( '/api/proveedores/id/' . $id . '/delete', 'DELETE' );
+        return $this->doRequestHeader( '/api/iva/delete/id/' . $id , 'DELETE' );
     }
 
     public function showEdit( $id ) {
-        return $this->doRequestHeader( '/api/proveedores/id/' . $id . '/data', 'GET' );
+        return $this->doRequestHeader( '/api/iva/get/id/' . $id . '/data', 'GET' );
     }
 }

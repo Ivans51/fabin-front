@@ -16,7 +16,7 @@ class ProductosRepo extends GuzzleHTTPRequest
     }
 
 	public function indexCategoria() {
-		return $this->doRequestHeader( '/api/users/levelusers', 'GET' );
+		return $this->doRequestHeader( '/api/categorias/getall', 'GET' );
 	}
 
 	public function indexProveedor() {
@@ -24,7 +24,7 @@ class ProductosRepo extends GuzzleHTTPRequest
 	}
 
 	public function indexMedidas() {
-		return $this->doRequestHeader( '/api/users/levelusers', 'GET' );
+		return $this->doRequestHeader( '/api/unidadmedida/getall', 'GET' );
 	}
 
 	public function indexStock() {
