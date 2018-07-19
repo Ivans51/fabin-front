@@ -63,9 +63,9 @@ class UsuarioLoginController extends Controller {
 	}
 
 	public function showRegister() {
-		$nivelValue = $this->getNivel();
+		$data = $this->getNivel();
 
-		return view( 'cms.register', compact( 'nivelValue' ) );
+		return view( 'cms.register', compact( 'data' ) );
 	}
 
 	/**

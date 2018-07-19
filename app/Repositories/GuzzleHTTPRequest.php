@@ -19,7 +19,8 @@ class GuzzleHTTPRequest {
 	 */
 	public function __construct() {
 		$this->client = new Client( [
-			'base_uri' => 'http://165.227.96.113:5010'
+			/*'base_uri' => 'http://165.227.96.113:5010'*/
+			'base_uri' => 'localhost:5010'
 		] );
 	}
 
