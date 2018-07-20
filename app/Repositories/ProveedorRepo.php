@@ -8,6 +8,8 @@
 
 namespace App\Repositories;
 
+use App\Repositories\Core\GuzzleHTTPRequest;
+
 class ProveedorRepo extends GuzzleHTTPRequest {
 
 	public function indexProveedor() {

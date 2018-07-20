@@ -6,10 +6,10 @@
  * Time: 21:49
  */
 
-namespace App\Repositories;
+namespace App\Repositories\Core;
 
 
-class StatusRequest
+class ManagerRequest
 {
 
     public function getCode($res, $infoView)

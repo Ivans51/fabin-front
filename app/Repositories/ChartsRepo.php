@@ -8,6 +8,8 @@
 
 namespace App\Repositories;
 
+use App\Repositories\Core\GuzzleHTTPRequest;
+
 class ChartsRepo extends GuzzleHTTPRequest
 {
 

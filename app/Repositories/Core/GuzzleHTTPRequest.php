@@ -6,12 +6,13 @@
  * Time: 8:05
  */
 
-namespace App\Repositories;
+namespace App\Repositories\Core;
 
+use App\Repositories\Core\ManagerRequest;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
-class GuzzleHTTPRequest extends StatusRequest{
+class GuzzleHTTPRequest extends ManagerRequest {
 	protected $client;
 
 	/**
