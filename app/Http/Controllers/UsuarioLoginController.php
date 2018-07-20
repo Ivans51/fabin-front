@@ -28,14 +28,10 @@ class UsuarioLoginController extends Controller {
 			'contrasenha' => $request->input( 'contrasenha' )
 		];
 		$res = $this->repo->loginUser( $arr );
-		if ( $res->StatusCode != null ) {
-			if ( $res->StatusCode == 200 ) {
-				session( [ 'user_token' => $res->Data->token ] );
-				session( [ 'user_info' => $res->Data ] );
-				return (new SampleChart())->chart();
-			} else {
-				return $this->repo->getViewInfo( 'cms.login', 'Datos errones', [] );
-			}
+		if ( $this->repo->isSuccessful($res) ) {
+            session( [ 'user_token' => $res->Data->token ] );
+            session( [ 'user_info' => $res->Data ] );
+            return (new SampleChart())->chart();
 		} else {
 			return $this->repo->getViewInfo( 'cms.login', 'Datos errones', [] );
 		}
@@ -54,7 +50,8 @@ class UsuarioLoginController extends Controller {
 			];
 			$res = $this->repo->registerUser( $arr );
 			$infoView = $this->repo->setInfoView('cms.register', 'Usuario Registrado', 'Error en registro');
-			return $this->repo->getView($res, $infoView, $this->getNivel() );
+
+            return $this->repo->getCode($res, $infoView) == 200 ? $this->showLogin() : abort(404, 'Error creando categoría');
 		} else {
 			session()->flash( 'info', 'Datos erroneos' );
 
@@ -63,22 +60,17 @@ class UsuarioLoginController extends Controller {
 	}
 
 	public function showRegister() {
-		$data = $this->getNivel();
-
-		return view( 'cms.register', compact( 'data' ) );
-	}
-
-	/**
-	 * @return array
-	 */
-	public function getNivel(): array {
-		$nivel      = $this->repo->nivelUser()->Data;
-		$nivelValue = array( 'Seleccionar' );
-		for ( $i = 0; $i < count( $nivel ); $i ++ ) {
-			$nivelValue[] = $nivel[ $i ]->descripcion;
-		}
-
-		return $nivelValue;
+        $nivel      = $this->repo->nivelUser();
+        if ($this->repo->isSuccessful($nivel)) {
+            $nivelValue = array('Seleccionar');
+            for ($i = 0; $i < count($nivel->Data); $i++) {
+                $nivelValue[] = $nivel[$i]->Data->descripcion;
+            }
+            $data = $nivelValue;
+            return view( 'cms.register', compact( 'data' ) );
+        } else {
+            abort (404, 'Error');
+        }
 	}
 
 	public function showReset() {
@@ -94,7 +86,7 @@ class UsuarioLoginController extends Controller {
 		];
 		$res = $this->repo->resetUser( $arr, session( 'user_info' ) );
 		$infoView = $this->repo->setInfoView('cms.login', 'Contraseña cambiada', 'Datos erroneos');
-		return $this->repo->getView($res, $infoView ,[]);
+		return $this->repo->getView($res, $infoView );
 	}
 
 	public function close() {

@@ -28,7 +28,7 @@ class ProveedorController extends Controller {
 		$res      = $this->repo->indexProveedor();
 		$infoView = $this->repo->setInfoView( 'cms.proveedor.detalles.index', '', 'Error' );
 
-		return $this->repo->getView( $res, $infoView, $res->Data );
+		return $this->repo->getView( $res, $infoView );
 	}
 
 	/**
@@ -60,7 +60,7 @@ class ProveedorController extends Controller {
 		$res      = $this->repo->create( $arr );
 		$infoView = $this->repo->setInfoView( 'cms.proveedor.detalles.index', 'Proveedor Creado', 'Error' );
 
-		return $this->repo->getView( $res, $infoView, $this->repo->indexProveedor()->Data );
+        return $this->repo->getCode($res, $infoView) == 200 ? $this->index() : abort(404, 'Error creando proveedor');
 	}
 
 	/**
@@ -87,7 +87,7 @@ class ProveedorController extends Controller {
 		$res      = $this->repo->showEdit( $id );
 		$infoView = $this->repo->setInfoView( 'cms.proveedor.detalles.edit', '', 'Error' );
 
-		return $this->repo->getView( $res, $infoView, $res->Data );
+		return $this->repo->getView( $res, $infoView );
 	}
 
 	/**
@@ -107,9 +107,9 @@ class ProveedorController extends Controller {
 			'telefono'         => $request->input( 'telefono' ),
 		];
 		$res      = $this->repo->edit( $arr, $id );
-		$infoView = $this->repo->setInfoView( 'cms.proveedor.detalles.index', 'Proveedor Creado', 'Error' );
+		$infoView = $this->repo->setInfoView( 'cms.proveedor.detalles.index', 'Proveedor Actualizado', 'Error' );
 
-		return $this->repo->getView( $res, $infoView, $this->repo->indexProveedor()->Data );
+        return $this->repo->getCode($res, $infoView) == 200 ? $this->edit($id) : abort(404, 'Error creando proveedor');
 	}
 
 	/**
@@ -123,6 +123,6 @@ class ProveedorController extends Controller {
 		$res      = $this->repo->delete( $id );
 		$infoView = $this->repo->setInfoView( 'cms.proveedor.detalles.index', 'Proveedor Eliminado', 'Error' );
 
-		return $this->repo->getView( $res, $infoView, $this->repo->indexProveedor()->Data );
+        return $this->repo->getCode($res, $infoView) == 200 ? $this->index() : abort(404, 'Error creando proveedor');
 	}
 }

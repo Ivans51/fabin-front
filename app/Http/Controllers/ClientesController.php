@@ -27,7 +27,7 @@ class ClientesController extends Controller {
 		$res      = $this->repo->indexClientes();
 		$infoView = $this->repo->setInfoView( 'cms.clientes.detalles.index', '', 'Error' );
 
-		return $this->repo->getView( $res, $infoView, $res->Data );
+		return $this->repo->getView( $res, $infoView );
 	}
 
 	/**
@@ -59,7 +59,7 @@ class ClientesController extends Controller {
 		$res      = $this->repo->create( $arr );
 		$infoView = $this->repo->setInfoView( 'cms.clientes.detalles.index', 'Cliente Creado', 'Error' );
 
-		return $this->repo->getView( $res, $infoView, $this->repo->indexClientes()->Data );
+        return $this->repo->getCode($res, $infoView) == 200 ? $this->index() : abort(404, 'Error creando cliente');
 	}
 
 	/**
@@ -86,7 +86,7 @@ class ClientesController extends Controller {
 		$res      = $this->repo->showEdit( $id );
 		$infoView = $this->repo->setInfoView( 'cms.clientes.detalles.edit', '', 'Error' );
 
-		return $this->repo->getView( $res, $infoView, $res->Data );
+		return $this->repo->getView( $res, $infoView );
 	}
 
 	/**
@@ -108,7 +108,7 @@ class ClientesController extends Controller {
 		$res      = $this->repo->edit( $arr, $id );
 		$infoView = $this->repo->setInfoView( 'cms.clientes.detalles.index', 'Cliente editado', 'Error' );
 
-		return $this->repo->getView( $res, $infoView, $this->repo->indexClientes()->Data );
+        return $this->repo->getCode($res, $infoView) == 200 ? $this->edit($id) : abort(404, 'Error creando cliente');
 	}
 
 	/**
@@ -122,6 +122,6 @@ class ClientesController extends Controller {
 		$res      = $this->repo->delete( $id );
 		$infoView = $this->repo->setInfoView( 'cms.clientes.detalles.index', 'Cliente Eliminado', 'Error' );
 
-		return $this->repo->getView( $res, $infoView, $this->repo->indexClientes()->Data );
+        return $this->repo->getCode($res, $infoView) == 200 ? $this->index() : abort(404, 'Error creando cliente');
 	}
 }

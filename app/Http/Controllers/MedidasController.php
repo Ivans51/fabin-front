@@ -28,7 +28,7 @@ class MedidasController extends Controller {
 		$res      = $this->repo->indexMedidas();
 		$infoView = $this->repo->setInfoView( 'cms.catalogo.medidas.index', '', 'Error' );
 
-		return $this->repo->getView( $res, $infoView, $res->Data );
+		return $this->repo->getView( $res, $infoView );
 	}
 
 	/**
@@ -51,16 +51,13 @@ class MedidasController extends Controller {
 	 */
 	public function store( Request $request ) {
 		$arr      = [
-			'Nombre_proveedor' => $request->input( 'nombre' ),
-			'Empresa'          => $request->input( 'empresa' ),
-			'direccion'        => $request->input( 'direccion' ),
-			'email'            => $request->input( 'email' ),
-			'telefono'         => $request->input( 'telefono' ),
+			'descripcion' => $request->input( 'descripcion' ),
+			'descripcion_larga'          => $request->input( 'descripcion_larga' ),
 		];
 		$res      = $this->repo->create( $arr );
 		$infoView = $this->repo->setInfoView( 'cms.catalogo.medidas.index', 'Medida Creada', 'Error' );
 
-		return $this->repo->getView( $res, $infoView, $this->repo->indexMedidas()->Data );
+        return $this->repo->getCode($res, $infoView) == 200 ? $this->index() : abort(404, 'Error creando Medida');
 	}
 
 	/**
@@ -86,7 +83,7 @@ class MedidasController extends Controller {
 		$res      = $this->repo->showEdit( $id );
 		$infoView = $this->repo->setInfoView( 'cms.catalogo.medidas.index', '', 'Error' );
 
-		return $this->repo->getView( $res, $infoView, $res->Data );
+		return $this->repo->getView( $res, $infoView );
 	}
 
 	/**
@@ -99,16 +96,13 @@ class MedidasController extends Controller {
 	 */
 	public function update( Request $request, $id ) {
 		$arr      = [
-			'Nombre_proveedor' => $request->input( 'nombre' ),
-			'Empresa'          => $request->input( 'empresa' ),
-			'direccion'        => $request->input( 'direccion' ),
-			'email'            => $request->input( 'email' ),
-			'telefono'         => $request->input( 'telefono' ),
+			'descripcion' => $request->input( 'descripcion' ),
+			'descripcion_larga'          => $request->input( 'descripcion_larga' ),
 		];
 		$res      = $this->repo->edit( $arr, $id );
 		$infoView = $this->repo->setInfoView( 'cms.catalogo.medidas.index', 'Medida editada', 'Error' );
 
-		return $this->repo->getView( $res, $infoView, $this->repo->indexMedidas()->Data );
+        return $this->repo->getCode($res, $infoView) == 200 ? $this->edit($id) : abort(404, 'Error creando Medida');
 	}
 
 	/**
@@ -122,6 +116,6 @@ class MedidasController extends Controller {
 		$res      = $this->repo->delete( $id );
 		$infoView = $this->repo->setInfoView( 'cms.catalogo.medidas.index', 'Medida Eliminada', 'Error' );
 
-		return $this->repo->getView( $res, $infoView, $this->repo->indexMedidas()->Data );
+        return $this->repo->getCode($res, $infoView) == 200 ? $this->index() : abort(404, 'Error creando Medida');
 	}
 }

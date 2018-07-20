@@ -28,7 +28,7 @@ class AuditoriaController extends Controller {
 	public function index() {
 		$res = $this->repo->indexAuditoria();
 		$infoView = $this->repo->setInfoView('cms.operaciones.auditoria.index', '', 'Error');
-		return $this->repo->getView($res, $infoView , $res->Data);
+		return $this->repo->getView($res, $infoView);
 	}
 
     public function displayReport(Request $request) {

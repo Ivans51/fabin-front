@@ -53,7 +53,7 @@ class UsuariosController extends Controller {
 		$res      = $this->repo->allUsers();
 		$infoView = $this->repo->setInfoView( 'cms.usuarios.detalles.todos', '', 'Error' );
 
-		return $this->repo->getView( $res, $infoView, $res->Data );
+		return $this->repo->getView( $res, $infoView );
 	}
 
 	/**
@@ -112,9 +112,9 @@ class UsuariosController extends Controller {
 			'telefono'         => $request->input( 'telefono' ),
 		];
 		$res      = $this->repo->edit( $arr, $id );
-		$infoView = $this->repo->setInfoView( 'cms.proveedor.detalles.index', 'Proveedor Creado', 'Error' );
+		$infoView = $this->repo->setInfoView( 'cms.proveedor.detalles.index', 'Usuario Creado', 'Error' );
 
-		return $this->repo->getView( $res, $infoView, $this->repo->indexUser()->Data );
+        return $this->repo->getCode($res, $infoView) == 200 ? $this->edit($id) : abort(404, 'Error creando usuario');
 	}
 
 	/**
@@ -126,8 +126,8 @@ class UsuariosController extends Controller {
 	 */
 	public function destroy( $id ) {
 		$res      = $this->repo->delete( $id );
-		$infoView = $this->repo->setInfoView( 'cms.usuarios.detalles.todos', 'Proveedor Eliminado', 'Error' );
+		$infoView = $this->repo->setInfoView( 'cms.usuarios.detalles.todos', 'Usuario Eliminado', 'Error' );
 
-		return $this->repo->getView( $res, $infoView, $this->repo->indexUser()->Data );
+        return $this->repo->getCode($res, $infoView) == 200 ? $this->index() : abort(404, 'Error eliminando usuario');
 	}
 }

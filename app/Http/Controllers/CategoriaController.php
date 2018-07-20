@@ -27,7 +27,7 @@ class CategoriaController extends Controller {
 		$res      = $this->repo->indexCategoria();
 		$infoView = $this->repo->setInfoView( 'cms.catalogo.categoria.index', '', 'Error' );
 
-		return $this->repo->getView( $res, $infoView, $res->Data );
+		return $this->repo->getView( $res, $infoView );
 	}
 
 	/**
@@ -50,16 +50,12 @@ class CategoriaController extends Controller {
 	 */
 	public function store( Request $request ) {
 		$arr      = [
-			'Nombre_proveedor' => $request->input( 'nombre' ),
-			'Empresa'          => $request->input( 'empresa' ),
-			'direccion'        => $request->input( 'direccion' ),
-			'email'            => $request->input( 'email' ),
-			'telefono'         => $request->input( 'telefono' ),
+			'nombre' => $request->input( 'nombre' ),
+			'descripcion_larga'          => $request->input( 'descripcion_larga' ),
 		];
 		$res      = $this->repo->create( $arr );
 		$infoView = $this->repo->setInfoView( 'cms.catalogo.categoria.index', 'Categoría Creada', 'Error' );
-
-		return $this->repo->getView( $res, $infoView, $this->repo->indexCategoria()->Data );
+        return $this->repo->getCode($res, $infoView) == 200 ? $this->index() : abort(404, 'Error creando categoría');
 	}
 
 	/**
@@ -85,7 +81,7 @@ class CategoriaController extends Controller {
 		$res      = $this->repo->showEdit( $id );
 		$infoView = $this->repo->setInfoView( 'cms.catalogo.categoria.edit', '', 'Error' );
 
-		return $this->repo->getView( $res, $infoView, $res->Data );
+		return $this->repo->getView( $res, $infoView );
 	}
 
 	/**
@@ -98,16 +94,12 @@ class CategoriaController extends Controller {
 	 */
 	public function update( Request $request, $id ) {
 		$arr      = [
-			'Nombre_proveedor' => $request->input( 'nombre' ),
-			'Empresa'          => $request->input( 'empresa' ),
-			'direccion'        => $request->input( 'direccion' ),
-			'email'            => $request->input( 'email' ),
-			'telefono'         => $request->input( 'telefono' ),
+			'nombre' => $request->input( 'nombre' ),
+			'descripcion_larga'          => $request->input( 'descripcion_larga' ),
 		];
 		$res      = $this->repo->edit( $arr, $id );
 		$infoView = $this->repo->setInfoView( 'cms.catalogo.categoria.edit', 'Categoría editada', 'Error' );
-
-		return $this->repo->getView( $res, $infoView, $this->repo->indexCategoria()->Data );
+        return $this->repo->getCode($res, $infoView) == 200 ? $this->edit($id) : abort(404, 'Error editando categoría');
 	}
 
 	/**
@@ -121,6 +113,6 @@ class CategoriaController extends Controller {
 		$res      = $this->repo->delete( $id );
 		$infoView = $this->repo->setInfoView( 'cms.catalogo.categoria.edit', 'Categoría Eliminada', 'Error' );
 
-		return $this->repo->getView( $res, $infoView, $this->repo->indexCategoria()->Data );
+        return $this->repo->getCode($res, $infoView) == 200 ? $this->index() : abort(404, 'Error eliminando categoría');
 	}
 }

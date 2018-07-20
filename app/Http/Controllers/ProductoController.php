@@ -39,9 +39,12 @@ class ProductoController extends Controller {
 			'proveedores' => $this->getProveedores( $proveedor ),
 			/*'stock'      => $stock->Data,*/
 		];
-		$infoView = $this->repo->setInfoView( 'cms.catalogo.producto.index', '', 'Error' );
-
-		return $this->repo->getView( $res, $infoView, $data, true );
+		if ($this->repo->isSuccessful($res) and $this->repo->isSuccessful($iva) and $this->repo->isSuccessful($categories)
+            and $this->repo->isSuccessful($medidas) and $this->repo->isSuccessful($proveedor) ) {
+            return $this->repo->getViewInfoMultiple('cms.catalogo.producto.index', '', $data);
+        } else {
+		    return abort (404, 'Error cargando datos');
+        }
 	}
 
 	/**

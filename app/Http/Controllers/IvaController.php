@@ -28,7 +28,7 @@ class IvaController extends Controller {
 		$res      = $this->repo->indexIVA();
 		$infoView = $this->repo->setInfoView( 'cms.pago.iva.index', '', 'Error' );
 
-		return $this->repo->getView( $res, $infoView, $res->Data );
+		return $this->repo->getView( $res, $infoView );
 	}
 
 	/**
@@ -51,16 +51,13 @@ class IvaController extends Controller {
 	 */
 	public function store( Request $request ) {
 		$arr      = [
-			'Nombre_proveedor' => $request->input( 'nombre' ),
-			'Empresa'          => $request->input( 'empresa' ),
-			'direccion'        => $request->input( 'direccion' ),
-			'email'            => $request->input( 'email' ),
-			'telefono'         => $request->input( 'telefono' ),
+			'nombre' => $request->input( 'nombre' ),
+			'porcentaje'          => $request->input( 'porcentaje' ),
 		];
 		$res      = $this->repo->create( $arr );
-		$infoView = $this->repo->setInfoView( 'cms.pago.iva.index', 'Cliente Creado', 'Error' );
+		$infoView = $this->repo->setInfoView( 'cms.pago.iva.index', 'IVA Creado', 'Error' );
 
-		return $this->repo->getView( $res, $infoView, $this->repo->indexIVA()->Data );
+        return $this->repo->getCode($res, $infoView) == 200 ? $this->index() : abort(404, 'Error creando IVA');
 	}
 
 	/**
@@ -86,7 +83,7 @@ class IvaController extends Controller {
 		$res      = $this->repo->showEdit( $id );
 		$infoView = $this->repo->setInfoView( 'cms.pago.iva.index', '', 'Error' );
 
-		return $this->repo->getView( $res, $infoView, $res->Data );
+		return $this->repo->getView( $res, $infoView );
 	}
 
 	/**
@@ -100,15 +97,12 @@ class IvaController extends Controller {
 	public function update( Request $request, $id ) {
 		$arr      = [
 			'Nombre_proveedor' => $request->input( 'nombre' ),
-			'Empresa'          => $request->input( 'empresa' ),
-			'direccion'        => $request->input( 'direccion' ),
-			'email'            => $request->input( 'email' ),
-			'telefono'         => $request->input( 'telefono' ),
+			'porcentaje'          => $request->input( 'porcentaje' ),
 		];
 		$res      = $this->repo->edit( $arr, $id );
 		$infoView = $this->repo->setInfoView( 'cms.pago.iva.index', 'IVA editado', 'Error' );
 
-		return $this->repo->getView( $res, $infoView, $this->repo->indexIVA()->Data );
+        return $this->repo->getCode($res, $infoView) == 200 ? $this->edit($id) : abort(404, 'Error creando IVA');
 	}
 
 	/**
@@ -122,6 +116,6 @@ class IvaController extends Controller {
 		$res      = $this->repo->delete( $id );
 		$infoView = $this->repo->setInfoView( 'cms.pago.iva.index', 'IVA Eliminado', 'Error' );
 
-		return $this->repo->getView( $res, $infoView, $this->repo->indexIVA()->Data );
+        return $this->repo->getCode($res, $infoView) == 200 ? $this->index() : abort(404, 'Error creando IVA');
 	}
 }
