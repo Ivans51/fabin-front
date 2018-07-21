@@ -64,7 +64,7 @@ class UsuarioLoginController extends Controller {
         if ($this->repo->isSuccessful($nivel)) {
             $nivelValue = array('Seleccionar');
             for ($i = 0; $i < count($nivel->Data); $i++) {
-                $nivelValue[] = $nivel[$i]->Data->descripcion;
+                $nivelValue[] = $nivel->Data[$i]->descripcion;
             }
             $data = $nivelValue;
             return view( 'cms.register', compact( 'data' ) );
