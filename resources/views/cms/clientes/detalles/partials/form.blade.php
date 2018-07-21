@@ -1,4 +1,6 @@
-<div class="form-group">
+<form action="{{route('clientes.store')}}" method="POST">
+    {{ csrf_field() }}
+    <div class="form-group">
     {{ Form::label('email', 'Correo') }}
     {{ Form::text('email', null, ['class' => 'form-control', 'id' => 'email']) }}
 </div>
@@ -17,3 +19,4 @@
 <div class="form-group">
     {{ Form::submit('Guardar', ['class' => 'btn btn-sm btn-primary']) }}
 </div>
+</form>

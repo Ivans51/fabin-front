@@ -1,4 +1,6 @@
-<div class="form-group">
+<form action="{{route('medidas.store')}}" method="POST">
+    {{ csrf_field() }}
+    <div class="form-group">
 	{{ Form::label('descripcion', 'Descripcion') }}
 	{{ Form::text('descripcion', null, ['class' => 'form-control', 'id' => 'descripcion']) }}
 </div>
@@ -9,3 +11,4 @@
 <div class="form-group">
 	{{ Form::submit('Guardar', ['class' => 'btn btn-sm btn-primary']) }}
 </div>
+</form>

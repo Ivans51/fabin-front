@@ -6,6 +6,7 @@
                 <h3>Hubo un error en el servidor</h3>
                 <p>Mensaje de error: {{ $exception->getMessage() }}</p>
             </div>
+            <a href="{{ url()->previous() }}" class="btn btn-default">Volver página anterior</a>
         </div>
     </div>
 @endsection

@@ -4,7 +4,7 @@
 
     <div class="panel-heading modal-effect mb-3">
         <!-- Trigger/Open The Modal -->
-        <button id="myBtn" class="accordion">Añadir producto</button>
+        <button id="myBtn" class="accordion">Agregar producto</button>
         <!-- The Modal -->
         <div id="myModal" class="modal">
             <!-- Modal content -->

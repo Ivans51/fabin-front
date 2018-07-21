@@ -83,7 +83,11 @@
         @if(session('user_token'))
             <div class="container-left"></div>@endif
         <div style="flex: 1">
-            @yield('content')
+            @if(session('user_token'))
+                @yield('content')
+            @else
+                @yield('content-login')
+            @endif
             @if (session('info'))
                 <div class="container">
                     <div class="row">

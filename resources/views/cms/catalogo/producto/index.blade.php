@@ -1,28 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="container">
-        <div class="panel-heading modal-effect mb-3">
-            <!-- Trigger/Open The Modal -->
-            <button id="myBtn" class="accordion">Añadir producto</button>
-            <!-- The Modal -->
-            <div id="myModal" class="modal">
-                <!-- Modal content -->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3></h3>
-                        <span class="close">&times;</span>
-                    </div>
-                    <div class="modal-body">
-                        @include('cms.catalogo.producto.partials.form')
-                    </div>
-                    <div class="modal-footer">
-                        <h3></h3>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @include('cms.modal', ['view' => 'cms.catalogo.producto.partials.form', 'button' => 'Agregar producto', 'header' => 'Agregar producto'])
         <div class="row">
             <div class="col-md-12 col-md-offset-12">
                 <div class="panel panel-default">

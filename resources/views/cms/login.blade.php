@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('content')
+@section('content-login')
     @push('styles')
         <link href="{{ asset('css/login.css') }}" rel="stylesheet">
     @endpush
@@ -42,7 +42,10 @@
 
                     <div class="form-group text-right">
                         <button type="submit" class="btn btn-dark">
-                            Login
+                            Recuperar clave
+                        </button>
+                        <button type="submit" class="btn btn-dark">
+                            Iniciar
                         </button>
                     </div>
                 </form>

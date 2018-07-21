@@ -1,34 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="container">
-        <div class="panel-heading modal-effect mb-3 mt-3">
-            <!-- Trigger/Open The Modal -->
-            <button id="myBtn" class="accordion">Añadir proveedor</button>
-            <!-- The Modal -->
-            <div id="myModal" class="modal">
-                <!-- Modal content -->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3>Añadir Proveedor</h3>
-                        <span class="close">&times;</span>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{{route('proveedor.store')}}" method="POST">
-                            {{ csrf_field() }}
-                            @include('cms.proveedor.detalles.partials.form')
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @include('cms.modal', ['view' => 'cms.proveedor.detalles.partials.form', 'button' => 'Agregar proveedor', 'header' => 'Agregar proveedor'])
         <div class="row">
             <div class="col-md-12 col-md-offset-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         @include('cms.proveedor.detalles.partials.errors')
-                        <h3>Lista de Productos</h3>
+                        <h3>Lista de Proveedores</h3>
                         <table class="table table-striped table-hover">
                             <thead>
                             <tr>

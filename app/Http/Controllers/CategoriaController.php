@@ -51,7 +51,7 @@ class CategoriaController extends Controller {
 	public function store( Request $request ) {
 		$arr      = [
 			'nombre' => $request->input( 'nombre' ),
-			'descripcion_larga'          => $request->input( 'descripcion_larga' ),
+			'descripcion_larga'          => $request->input( 'descripcion_indexlarga' ),
 		];
 		$res      = $this->repo->create( $arr );
 		$infoView = $this->repo->setInfoView( 'cms.catalogo.categoria.index', 'Categoría Creada', 'Error' );
