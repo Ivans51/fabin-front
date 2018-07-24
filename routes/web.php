@@ -30,6 +30,9 @@ Route::get( 'reset', 'UsuarioLoginController@showReset' )->name('usuario_show_re
 Route::put( 'user/reset', 'UsuarioLoginController@reset' )->name('usuario_reset');
 Route::get( 'usuarios/todos', 'UsuariosController@all' )->name('usuarios_todos');
 
+Route::get('charts/index/{chart}', 'ChartsController@start')->name('charts_index');
+Route::resource('charts', 'ChartsController');
+
 Route::resource( 'producto', 'ProductoController' );
 Route::resource( 'categoria', 'CategoriaController' );
 Route::resource( 'medidas', 'MedidasController' );

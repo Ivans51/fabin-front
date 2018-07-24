@@ -1,6 +1,9 @@
-<div class="panel-heading modal-effect mb-3">
+<div class="panel-heading modal-effect mt-3 mb-3">
     <!-- Trigger/Open The Modal -->
-    <button id="myBtn" class="accordion">{{ $button }}</button>
+    <div class="d-flex justify-content-between">
+        <h3>{{ $title }}</h3>
+        <button id="myBtn" class="accordion"><i class="fas fa-shopping-cart pr-2"></i>{{ $button }}</button>
+    </div>
     <!-- The Modal -->
     <div id="myModal" class="modal">
         <!-- Modal content -->

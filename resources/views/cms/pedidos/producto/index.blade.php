@@ -2,12 +2,11 @@
 
 @section('content')
     <div class="container">
-        @include('cms.modal', ['view' => 'cms.pedidos.producto.partials.form', 'button' => 'Agregar pedido', 'header' => 'Agregar pedido'])
         <div class="row">
             <div class="col-md-12 col-md-offset-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <h3>Lista de Pedidos</h3>
+                        @include('cms.modal', ['view' => 'cms.catalogo.medidas.partials.form', 'button' => 'Agregar medidas', 'title' => 'Pedidos', 'header' => 'Agregar medidas'])
                         <table class="table table-striped table-hover">
                             <thead>
                             <tr>

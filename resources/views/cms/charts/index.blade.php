@@ -3,8 +3,8 @@
 @section('content')
     <div id="page-wrapper">
         <div id="page-inner">
+            <h1>Gráficos</h1>
             <div class="row">
-                <h1>Gráficos</h1>
                 <div>{!! $chart->container() !!}</div>
             </div>
         </div>
