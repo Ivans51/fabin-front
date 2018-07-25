@@ -34,7 +34,7 @@
                                 <label>
                                     <input type="checkbox"
                                            name="remember" {{--{{ old('remember') ? 'checked' : '' }}--}}>
-                                    Remember Me
+                                    Recordar
                                 </label>
                             </div>
                         </div>

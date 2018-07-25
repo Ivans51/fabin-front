@@ -5,13 +5,20 @@
         <select id="id_proveedor" name="id_proveedor" class="form-control">
             <option value="0">Seleccionar</option>
             @foreach ($proveedores as $key => $value)
-                <option value="{{ $value->id_proveedor }}">{{ $value->Nombre_proveedor }}</option>
+                <option value="{{ $value->id_proveedor }}"
+                        {{--@if ($key == old('myselect', $model->option))
+                        selected="selected"
+                        @endif--}}
+                        @if ($data[0][0]->id_proveedor == $value->id_proveedor)
+                        selected="selected"
+                        @endif
+                >{{ $value->Nombre_proveedor }}</option>
             @endforeach
         </select>
     </div>
     <div class="form-group">
         {{ Form::label('nombre', 'Nombre del producto') }}
-        {{ Form::text('nombre', null, ['class' => 'form-control', 'id' => 'nombre']) }}
+        {{ Form::text('nombre', $data[0]->nombre, ['class' => 'form-control', 'id' => 'nombre']) }}
     </div>
     <div class="form-group">
         {{ Form::label('imagen', 'Imagen') }}
@@ -23,7 +30,11 @@
             @foreach ($categories as $key => $value)
                 <option value="0">Seleccionar</option>
                 {{--<option value="{{ $key }}" {{ old('designation') == $key ? 'selected' : ''}}>{{ $value }}</option>--}}
-                <option value="{{ $value->Id_categoria }}">{{ $value->descripcion_larga }}</option>
+                <option value="{{ $value->Id_categoria }}"
+                        @if ($data[0]->Id_categoria == $value->Id_categoria)
+                        selected="selected"
+                        @endif
+                >{{ $value->descripcion_larga }}</option>
             @endforeach
         </select>
     </div>
@@ -32,20 +43,31 @@
         <select id="id_unidad_medida" name="id_unidad_medida" class="form-control">
             <option value="0">Seleccionar</option>
             @foreach ($unidades as $key => $value)
-                <option value="{{ $value->id_unidad_medida }}">{{ $value->descripcion_larga }}</option>
+                <option value="{{ $value->id_unidad_medida }}"
+                        @if ($data[0]->id_unidad_medida == $value->id_unidad_medida)
+                        selected="selected"
+                        @endif
+                >{{ $value->descripcion_larga }}</option>
             @endforeach
         </select>
     </div>
     <div class="form-group">
         {{ Form::label('cantidad', 'Unidades a registrar') }}
-        {{ Form::text('cantidad', null, ['class' => 'form-control']) }}
+        {{ Form::text('cantidad', $data[0]->cantidad, ['class' => 'form-control']) }}
     </div>
     <div class="form-group">
         {{ Form::label('id_impiuesto', 'IVA') }}
         <select id="id_impiuesto" name="id_impiuesto" class="form-control">
             <option value="0">Seleccionar</option>
             @foreach ($iva as $key => $value)
-                <option value="{{ $value->id_impiuesto }}">{{ $value->nombre }}</option>
+                <option value="{{ $value->id_impiuesto }}"
+                        {{--@if ($key == old('myselect', $model->option))
+                        selected="selected"
+                        @endif--}}
+                        @if ($data[0]->id_impiuesto == $value->id_impiuesto)
+                        selected="selected"
+                        @endif
+                >{{ $value->nombre }}</option>
             @endforeach
         </select>
     </div>

@@ -8,13 +8,8 @@
                     <div class="panel-heading">
                         Editar entrada
                     </div>
-
                     <div class="panel-body">
-                        {{--{!! Form::model($product, ['route' => ['producto.update', $product], 'method' => 'PUT', 'files' => true]) !!}
-
-                        @include('cms.catalogo.partials.form')
-
-                        {!! Form::close() !!}--}}
+                        @include('cms.catalogo.producto.partials.formedit')
                     </div>
                 </div>
             </div>

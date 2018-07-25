@@ -21,7 +21,7 @@
                                     <td>{{ $dato->id_articulo }}</td>
                                     <td>{{ $dato->nombre }}</td>
                                     <td width="10px">
-                                        <a href="{{ route('producto.edit', $dato->id_articulo) }}"
+                                        <a href="{{ route('producto.show', $dato->id_articulo) }}"
                                            class="btn btn-sm btn-default">Editar</a>
                                     </td>
                                     <td width="10px">

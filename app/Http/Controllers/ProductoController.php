@@ -18,6 +18,78 @@ class ProductoController extends Controller {
 		$this->repo = $repo;
 	}
 
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function create() {
+		$product = '';
+
+		return view( 'admin.posts.create', compact( 'product' ) );
+	}
+
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request $request
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function store( Request $request ) {
+		$imageData = $request->file( 'imagen' ); // your base64 encoded
+		$file_path = $imageData->getPathName();
+		$type      = pathinfo( $file_path, PATHINFO_EXTENSION );
+		$data      = file_get_contents( $file_path );
+		$image     = 'data:image/' . $type . ';base64,' . base64_encode( $data );
+
+		$nombre       = $request->input( 'nombre' );
+		$id_categoria = $request->input( 'id_categoria' );
+		$id_unidad    = $request->input( 'id_unidad_medida' );
+		$cantidad     = $request->input( 'cantidad' );
+		$id_impuesto  = $request->input( 'id_impiuesto' );
+		$id_proveedor = $request->input( 'id_proveedor' );
+
+		if ( $nombre != "" and $id_categoria != 0
+		                       and $id_unidad != 0 and $cantidad != 0
+		                                               and $id_impuesto != 0 and $id_proveedor != 0 ) {
+			$arr      = [
+				'nombre'           => $nombre,
+				'imagen'           => $image,
+				'Id_categoria'     => $id_categoria,
+				'id_unidad_medida' => $id_unidad,
+				'cantidad'         => $cantidad,
+				'id_impiuesto'     => $id_impuesto,
+			];
+			$res      = $this->repo->create( $arr, $id_proveedor );
+			$infoView = $this->repo->setInfoView( 'cms.catalogo.producto.index', 'Producto Creado', 'Error' );
+
+			$code = $this->repo->getCode( $res, $infoView, "Duplicate" );
+
+			switch ( $code ) {
+				case 200:
+					return $this->show( $res->Data->insertId );
+				case 501:
+					return abort( 404, 'El nombre del artículo duplicado' );
+				default:
+					return abort( 404, 'Error registrando' );
+			}
+		} else {
+			session()->flash( 'info', 'Faltan datos por rellenar' );
+
+			return $this->index();
+		}
+	}
+
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int $id
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function edit( $id ) {
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -31,20 +103,22 @@ class ProductoController extends Controller {
 		$medidas    = $this->repo->indexMedidas();
 		$proveedor  = $this->repo->indexProveedor();
 		/*$stock      = $this->repo->indexStock();*/
-		$data     = [
+		$data = [
 			'data'        => $res->Data,
-			'iva'         => $this->getIva( $iva ),
-			'categories'  => $this->getCategories( $categories ),
-			'unidades'    => $this->getUnidades( $medidas ),
-			'proveedores' => $this->getProveedores( $proveedor ),
+			'iva'         => $iva->Data,
+			'categories'  => $categories->Data,
+			'unidades'    => $medidas->Data,
+			'proveedores' => $proveedor->Data,
 			/*'stock'      => $stock->Data,*/
 		];
-		if ($this->repo->isSuccessful($res) and $this->repo->isSuccessful($iva) and $this->repo->isSuccessful($categories)
-            and $this->repo->isSuccessful($medidas) and $this->repo->isSuccessful($proveedor) ) {
-            return $this->repo->getViewInfoMultiple('cms.catalogo.producto.index', '', $data);
-        } else {
-		    return abort (404, 'Error cargando datos');
-        }
+		if ( $this->repo->isSuccessful( $res ) and $this->repo->isSuccessful( $iva )
+		                                           and $this->repo->isSuccessful( $categories )
+		                                               and $this->repo->isSuccessful( $medidas )
+		                                                   and $this->repo->isSuccessful( $proveedor ) ) {
+			return $this->repo->getViewInfoMultiple( 'cms.catalogo.producto.index', '', $data );
+		} else {
+			return abort( 404, 'Error cargando datos' );
+		}
 	}
 
 	/**
@@ -108,30 +182,6 @@ class ProductoController extends Controller {
 	}
 
 	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function create() {
-		$product = '';
-
-		return view( 'admin.posts.create', compact( 'product' ) );
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request $request
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function store( Request $request ) {
-		$post = '';
-
-		return redirect()->route( 'posts.edit', $post->id )->with( 'info', 'Entrada creada con éxito' );
-	}
-
-	/**
 	 * Display the specified resource.
 	 *
 	 * @param  int $id
@@ -139,20 +189,28 @@ class ProductoController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function show( $id ) {
-
-		return view( 'cms.catalogo.producto.show', compact( 'product' ) );
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int $id
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function edit( $id ) {
-
-		return view( 'cms.catalogo.producto.edit', compact( 'product' ) );
+		$res = $this->repo->showEdit( $id );
+		$iva        = $this->repo->indexIVA();
+		$categories = $this->repo->indexCategoria();
+		$medidas    = $this->repo->indexMedidas();
+		$proveedor  = $this->repo->indexProveedor();
+		/*$stock      = $this->repo->indexStock();*/
+		$data = [
+			'data'        => $res->Data,
+			'iva'         => $iva->Data,
+			'categories'  => $categories->Data,
+			'unidades'    => $medidas->Data,
+			'proveedores' => $proveedor->Data,
+			/*'stock'      => $stock->Data,*/
+		];
+		if ( $this->repo->isSuccessful( $res ) and $this->repo->isSuccessful( $iva )
+		                                           and $this->repo->isSuccessful( $categories )
+		                                               and $this->repo->isSuccessful( $medidas )
+		                                                   and $this->repo->isSuccessful( $proveedor ) ) {
+			return $this->repo->getViewInfoMultiple( 'cms.catalogo.producto.edit', '', $data );
+		} else {
+			return abort( 404, 'Error cargando datos' );
+		}
 	}
 
 	/**

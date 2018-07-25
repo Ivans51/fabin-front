@@ -2,11 +2,9 @@
 @section('content')
     <div id="page-wrapper">
         <div id="page-inner">
-            <div class="row p-4">
-                <h3>Hubo un error en el servidor</h3>
-                <p>Mensaje de error: {{ $exception->getMessage() }}</p>
-            </div>
-            <a href="{{ url()->previous() }}" class="btn btn-default">Volver página anterior</a>
+            <h3 class="d-block">Hubo un error en el servidor</h3>
+            <p>Mensaje de error: {{ $exception->getMessage() }}</p>
+            <a href="{{ url()->previous() }}" class="btn btn-default">Volver a la página anterior</a>
         </div>
     </div>
 @endsection

@@ -37,8 +37,8 @@ class ProductosRepo extends GuzzleHTTPRequest
 		return $this->doRequestHeader( '/api/iva/getall', 'GET' );
 	}
 
-	public function create( $arr ) {
-        return $this->doRequestBodyHeader( $arr, '/api/proveedores/newproveedor', 'POST' );
+	public function create( $arr, $id ) {
+		return $this->doRequestBodyHeader( $arr, '/api/articulos/newarticleproveedor/' . $id, 'POST' );
     }
 
 	public function edit( $arr, $id ) {
@@ -50,6 +50,6 @@ class ProductosRepo extends GuzzleHTTPRequest
     }
 
     public function showEdit( $id ) {
-        return $this->doRequestHeader( '/api/proveedores/id/' . $id . '/data', 'GET' );
+        return $this->doRequestHeader( '/api/articulos/id/' . $id , 'GET' );
     }
 }
